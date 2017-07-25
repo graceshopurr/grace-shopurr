@@ -19,3 +19,8 @@ const Order = db.define('order', {
     defaultValue: []
   }
 })
+
+module.exports = {
+  db,
+  Order
+}
