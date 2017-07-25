@@ -2,6 +2,7 @@ const crypto = require('crypto')
 const Sequelize = require('sequelize')
 const db = require('../db')
 
+
 const User = db.define('user', {
   email: {
     type: Sequelize.STRING,
@@ -16,8 +17,29 @@ const User = db.define('user', {
   },
   googleId: {
     type: Sequelize.STRING
+  },
+  isAdmin:{
+    type:Sequelize.BOOLEAN
+  }, 
+  billingAddress:{
+    type:Sequelize.STRING,
+  }, 
+  shippingAddress:{
+    type:Sequelize.STRING,
+  }, 
+  orderHistory:{
+    type:Sequelize.ARRAY(Sequelize.STRING)
   }
-})
+}
+//need to work on getter method for order history
+// {
+//   getterMethods:{
+//     getOrderHistory: function(userId){
+//       // this.orderHistory.forEach(order => {})
+//     }
+//   }
+// } 
+)
 
 module.exports = User
 
