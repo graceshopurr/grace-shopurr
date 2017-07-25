@@ -1,5 +1,7 @@
 # Boilermaker
 
+*** Before running: createdb grace-shopurr and grace-shopurr-test ***
+
 *Good things come in pairs*
 
 Looking to mix up a backend with express/sequelize and a frontend with react/redux? That's `boilermaker`!
@@ -31,6 +33,8 @@ To use this boilerplate, you'll need to take the following steps:
 
 * To use OAuth with Google, complete the step above with a real client ID and client secret from Google
   * You can get them here: https://console.developers.google.com/apis/credentials
+
+  ********** COMPLETED TO THIS POINT ***********
 
 ## Start
 
