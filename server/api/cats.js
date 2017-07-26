@@ -30,7 +30,7 @@ router.post('/newCat', (req, res, next) => {
     .catch(next);
 })
 
-// PUT /api/cats/newCat
+// PUT /api/cats/:catId/update
 router.put('/:catId/update', (req, res, next) => {
     const id = req.params.catId;
     Cat.findById(id)
@@ -38,7 +38,7 @@ router.put('/:catId/update', (req, res, next) => {
     .catch(next);
 })
 
-// DELETE /api/cats/newCat
+// DELETE /api/cats/:catId/delete
 router.delete('/:catId/delete', (req, res, next) => {
     const id = req.params.catId;
     Cat.findById(id)
