@@ -11,16 +11,14 @@ const Order = db.define('order', {
     values: ['pending','shipped','delivered', 'canceled']
   },
   cats: {
-    type: Sequelize.ARRAY,
+    type: Sequelize.ARRAY(Sequelize.STRING),
     defaultValue: []
   },
   donationProducts: {
-    type: Sequelize.ARRAY,
+    type: Sequelize.ARRAY(Sequelize.STRING),
     defaultValue: []
   }
 })
 
-module.exports = {
-  db,
-  Order
-}
+module.exports = Order;
+
