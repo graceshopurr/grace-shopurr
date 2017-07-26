@@ -19,14 +19,11 @@ const DonationProduct = db.define('donationProduct', {
 
   {
     getterMethods: {
-      dollarPrice: function(this.price) {
+      dollarPrice: function() {
         return this.price / 100;
       }
     }
   }
 )
 
-module.exports = {
-	db,
-	DonationProduct
-}
+module.exports = DonationProduct
