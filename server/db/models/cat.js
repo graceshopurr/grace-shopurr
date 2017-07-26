@@ -20,10 +20,6 @@ const Cat = db.define('cat', {
 		type: Sequelize.ENUM,
 		values: ['female', 'male', 'nonbinary']
 	},
-	ownerId: {
-		type: Sequelize.INTEGER,
-		defaultValue: null
-	},
 	status: {
 		type: Sequelize.ENUM,
 		values: ['available', 'adopted', 'pending']
@@ -34,7 +30,4 @@ const Cat = db.define('cat', {
 	}
 })
 
-module.exports = {
-	db,
-	Cat
-}
+module.exports = Cat
