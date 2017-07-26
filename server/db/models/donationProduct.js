@@ -26,7 +26,4 @@ const DonationProduct = db.define('donationProduct', {
   }
 )
 
-module.exports = {
-	db,
-	DonationProduct
-}
+module.exports = DonationProduct
