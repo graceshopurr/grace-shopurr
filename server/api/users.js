@@ -30,7 +30,7 @@ router.get('/:userId', (req, res, next) => {
     .catch(next);
 })
 
-// PUT /api/users/:userId/update
+// PUT /api/users/:userId
 router.put('/:userId/update', (req, res, next) => {
     const id = req.params.userId;
     User.findOne({
@@ -41,7 +41,7 @@ router.put('/:userId/update', (req, res, next) => {
     .catch(next);
 })
 
-// DELETE /api/users/:userId/delete
+// DELETE /api/users/:userId
 router.delete('/:userId/delete', (req, res, next) => {
     const id = req.params.userId;
     User.findOne({
