@@ -1,9 +1,11 @@
+
 const User = require('./user');
 const Cat = require('./cat');
 const DonationProduct = require('./donationProduct');
 const Order = require('./order');
 const Review = require('./review');
 
+const db = require('../db');
 
 /**
  * If we had any associations to make, this would be a great place to put them!
@@ -11,18 +13,20 @@ const Review = require('./review');
  *
  *    BlogPost.belongsTo(User)
  */
-console.log(User);
- Order.belongsTo(User);
 
- Review.belongsTo(DonationProduct);
- Review.belongsTo(User);
+db.models.order.belongsTo(db.models.user);
 
- Cat.belongsTo(User);
+ // Order.belongsTo(User);
 
- User.hasMany(Order);
- User.hasMany(Review);
+ // Review.belongsTo(DonationProduct);
+ // Review.belongsTo(User);
 
- DonationProduct.hasMany(Review); 
+ // Cat.belongsTo(User);
+
+ // User.hasMany(Order);
+ // User.hasMany(Review);
+
+ // DonationProduct.hasMany(Review); 
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,
