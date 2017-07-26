@@ -23,23 +23,23 @@ router.get('/:donationId', (req, res, next) => {
     .catch(next);
 })
 
-// POST /api/donations/newDonation
-router.post('/newDonation', (req, res, next) => {
+// POST /api/donations/
+router.post('/', (req, res, next) => {
   Donation.create(req.body)
     .then((donation) => res.json(donation))
     .catch(next);
 })
 
-// PUT /api/donations/newDonation
-router.put('/:donationId/update', (req, res, next) => {
+// PUT /api/donations/:donationId
+router.put('/:donationId', (req, res, next) => {
   const id = req.params.donationId;
   Donation.findById(id)
     .then(donation => donation.update(req.body))
     .catch(next);
 })
 
-// DELETE /api/donations/newDonation
-router.delete('/:donationId/delete', (req, res, next) => {
+// DELETE /api/donations/:donationId
+router.delete('/:donationId', (req, res, next) => {
   const id = req.params.donationId;
   Donation.findById(id)
     .then(foundDonation => { return foundDonation.destroy() })
