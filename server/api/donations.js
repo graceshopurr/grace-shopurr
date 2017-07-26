@@ -11,21 +11,21 @@ module.exports = router;
 
 // GET /api/donations
 router.get('/', (req, res, next) => {
-  Donation.findAll()
+  DonationProduct.findAll()
     .then(donations => res.json(donations))
     .catch(next);
 })
 // GET /api/donations/:donationId
 router.get('/:donationId', (req, res, next) => {
   const id = req.params.donationId;
-  Donation.findById(id)
+  DonationProduct.findById(id)
     .then(donation => res.json(donation))
     .catch(next);
 })
 
 // POST /api/donations/
 router.post('/', (req, res, next) => {
-  Donation.create(req.body)
+  DonationProduct.create(req.body)
     .then((donation) => res.json(donation))
     .catch(next);
 })
@@ -33,7 +33,7 @@ router.post('/', (req, res, next) => {
 // PUT /api/donations/:donationId
 router.put('/:donationId', (req, res, next) => {
   const id = req.params.donationId;
-  Donation.findById(id)
+  DonationProduct.findById(id)
     .then(donation => donation.update(req.body))
     .catch(next);
 })
@@ -41,7 +41,7 @@ router.put('/:donationId', (req, res, next) => {
 // DELETE /api/donations/:donationId
 router.delete('/:donationId', (req, res, next) => {
   const id = req.params.donationId;
-  Donation.findById(id)
+  DonationProduct.findById(id)
     .then(foundDonation => { return foundDonation.destroy() })
     .catch(next);
 });
