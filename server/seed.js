@@ -3,7 +3,7 @@ const Cat = db.model('cat');
 const User = db.model('user');
 const Review = db.model('review');
 const Order = db.model('order');
-const DonationProduct = db.model('donationProduct');
+const Product = db.model('product');
 
 const Promise = require('bluebird');
 const chance = require('chance')(123);
@@ -126,29 +126,29 @@ function randReview () {
 //   let reviews = doTimes()
 // }
 
-// DONATION PRODUCTS
+// PRODUCTS
 
-function randDonationProduct () {
-  return DonationProduct.build({
+function randProduct () {
+  return Product.build({
     name: chance.word(),
     description: chance.paragraph(),
     price: chance.natural({min: 1, max: 1000})
   });
 }
 
-function generateDonationProducts () {
-  let donations = doTimes(50, randDonationProduct);
-  donations.push(DonationProduct.build({
+function generateProducts () {
+  let products = doTimes(50, randProduct);
+  products.push(Product.build({
     name: 'Catnip',
     description: 'cat weed',
     price: 5
   }));
-  return donations;
+  return products;
 }
 
-function createDonationProducts () {
-  return Promise.map(generateDonationProducts(), function (donation) {
-    return donation.save();
+function createProducts () {
+  return Promise.map(generateProducts(), function (product) {
+    return product.save();
   });
 }
 
@@ -158,7 +158,7 @@ function randOrder () {
   return Order.build({
     status: chance.weighted(['pending','shipped','delivered', 'canceled'], [25, 25, 25, 25]),
     cats: [],
-    donationProducts: []
+    products: []
   });
 }
 
@@ -167,7 +167,7 @@ function generateOrders () {
   orders.push(Order.build({
     status: 'delivered',
     cats: ['21'],
-    donationProducts: []
+    products: []
   }));
   return orders;
 }
@@ -181,7 +181,7 @@ function createOrders () {
 //SEEDING
 
 function seed() {
-  let arr = [createUsers(), createCats(), createDonationProducts(), createOrders()];
+  let arr = [createUsers(), createCats(), createProducts(), createOrders()];
   return Promise.all(arr);
 }
 
