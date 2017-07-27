@@ -12,9 +12,17 @@ const Product = db.define('product', {
     },
     price: {
       type: Sequelize.INTEGER, //price in cents,
-      defaultValue: 0
-    }, //leaving off 'rating field' -- virtual field derived from associated reviews?
-
+      defaultValue: 0,
+      validate: {
+        min: 0
+      }
+    },
+    inventory: {
+      type: Sequelize.INTEGER,
+      validate: {
+        min: 0
+      }
+    }
   },
 
   {
