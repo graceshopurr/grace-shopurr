@@ -82,7 +82,7 @@ let images = [
 function randCat () {
   return Cat.build({
     name: catNames.pop(),
-    image:images.pop(),
+    image: images.pop(),
     age: chance.natural({min: 0, max: 30}),
     description: chance.sentence(),
     gender: chance.weighted(['female', 'male', 'nonbinary'], [35, 35, 30]),
@@ -100,7 +100,8 @@ function generateCats () {
     description: 'Sarah\'s Cat',
     gender: 'female',
     status: 'adopted',
-    specialNeeds: 'false'
+    specialNeeds: 'false',
+    userid: '101'
   }));
   return cats;
 }
@@ -111,17 +112,81 @@ function createCats () {
   });
 }
 
+// REVIEWS
+
+function randReview () {
+  return Review.build({
+    status: chance.weighted(['pending', 'approved'], [10, 90]),
+    review: chance.paragraph(),
+    rating: chance.weighted(['friendly', 'neutral', 'a little prickly'], [40, 40, 20])
+  });
+}
+
+// function generateReviews () {
+//   let reviews = doTimes()
+// }
+
+// DONATION PRODUCTS
+
+function randDonationProduct () {
+  return DonationProduct.build({
+    name: chance.word(),
+    description: chance.paragraph(),
+    price: chance.natural({min: 1, max: 1000})
+  });
+}
+
+function generateDonationProducts () {
+  let donations = doTimes(50, randDonationProduct);
+  donations.push(DonationProduct.build({
+    name: 'Catnip',
+    description: 'cat weed',
+    price: 5
+  }));
+  return donations;
+}
+
+function createDonationProducts () {
+  return Promise.map(generateDonationProducts(), function (donation) {
+    return donation.save();
+  });
+}
+
+// ORDER
+
+
+function randOrder () {
+  return Order.build({
+    status: chance.weighted(['pending','shipped','delivered', 'canceled'],
+                            [25, 25, 25, 25]),
+    cats: [],
+    donationProducts: []
+  });
+}
+
+function generateOrders () {
+  let orders = doTimes(10, randOrder);
+  orders.push(Order.build({
+    status: 'delivered',
+    cats: ['21'],
+    donationProducts: []
+  }));
+}
+
+function createOrders () {
+  return Promise.map(generateOrders(), function (order) {
+    return order.save();
+  });
+}
 
 //SEEDING
 
 function seed() {
-  return createUsers()
-  .then(() => {
-    return createCats();
-  });
+  let arr = [createUsers(), createCats(), createDonationProducts(), createOrders()];
+  return Promise.all(arr);
 }
 
-console.log('Syncing databse');
+console.log('Syncing database');
 
 db.sync({force: true})
 .then(() => {
