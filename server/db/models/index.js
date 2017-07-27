@@ -26,7 +26,12 @@ const Review = require('./review');
  User.hasMany(Order);
  User.hasMany(Review);
 
- DonationProduct.hasMany(Review); 
+ DonationProduct.hasMany(Review);
+
+ // DonationProducts belong to many Orders
+ // Orders have many DonationProducts
+
+ // Orders have many Cats
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,

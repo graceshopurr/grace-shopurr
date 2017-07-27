@@ -8,6 +8,7 @@ module.exports = router;
 // PUT /cats/:id - updates a cat
 // DELETE /cats/:id - deletes a cat
 // /cats/:id/addReview ?
+// EI: POST to /reviews instead
 
 // GET /api/cats
 router.get('/', (req, res, next) => {
@@ -23,7 +24,7 @@ router.get('/:catId', (req, res, next) => {
     .catch(next);
 })
 
-// POST /api/cats/newCat
+// POST /api/cats/
 router.post('/', (req, res, next) => {
     Cat.create(req.body)
     .then( (cat) => res.json(cat))

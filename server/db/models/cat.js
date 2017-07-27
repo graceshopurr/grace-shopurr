@@ -1,13 +1,15 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
+// EI: write tests for validations
+
 const Cat = db.define('cat', {
 	name: {
 		type: Sequelize.STRING,
 		unique: true,
 		allowNull: false
 	},
-	image : {
+	image : { // EI: imageUrl
 		type: Sequelize.STRING
 	},
 	age : {
