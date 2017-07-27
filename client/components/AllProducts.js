@@ -1,17 +1,25 @@
 import React, { Component } from 'react';
-import {withRouter, Link} from 'react-router-dom'
-import store from '../store';
+import axios from 'axios';
+
 
 export default class AllProducts extends Component {
 
   constructor () {
     super();
-    this.state = store.getState()
+    this.state = {
+      products: []
+    };
+  }
+
+  componentDidMount () {
+    axios.get('/api/products')
+      .then(res => res.data)
+      .then(products => this.setState({ products }));
   }
 
   render () {
 
-    const products = this.state.product.products;
+    const products = this.state.products;
 
     return (
         <div>
@@ -25,8 +33,7 @@ export default class AllProducts extends Component {
                                     <h5>
                                         <span>{product.name}</span>
                                     </h5>
-                                    <p>{product.description}</p>
-                                    <span>$ {product.dollarPrice()} </span>
+                                    <small>{product.songs.length} songs</small>
                                 </div>
                             </Link>
                         </div>
@@ -37,6 +44,4 @@ export default class AllProducts extends Component {
     )
   }
 }
-//maybe add description of the page and things 
-//how to use the getter method of dollar price - to check 
-
+//maybe add description of the page 
