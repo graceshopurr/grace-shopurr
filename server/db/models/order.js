@@ -10,7 +10,7 @@ const Order = db.define('order', {
     type: Sequelize.ARRAY(Sequelize.STRING),
     defaultValue: []
   },
-  donationProducts: {
+  products: {
     type: Sequelize.ARRAY(Sequelize.STRING),
     defaultValue: []
   }

@@ -1,7 +1,7 @@
 
 const User = require('./user');
 const Cat = require('./cat');
-const DonationProduct = require('./donationProduct');
+const Product = require('./product');
 const Order = require('./order');
 const Review = require('./review');
 
@@ -35,5 +35,5 @@ const Review = require('./review');
  * instead of: const User = require('../db/models/user')
  */
 module.exports = {
-  User, Cat, DonationProduct, Order, Review
+  User, Cat, Product, Order, Review
 }
