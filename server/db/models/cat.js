@@ -7,7 +7,7 @@ const Cat = db.define('cat', {
 		unique: true,
 		allowNull: false
 	},
-	image : {
+	image : { // EI: imageUrl
 		type: Sequelize.STRING
 	},
 	age : {

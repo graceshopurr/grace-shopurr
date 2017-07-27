@@ -23,7 +23,7 @@ router.get('/:catId', (req, res, next) => {
     .catch(next);
 })
 
-// POST /api/cats/newCat
+// POST /api/cats/
 router.post('/', (req, res, next) => {
     Cat.create(req.body)
     .then( (cat) => res.json(cat))
