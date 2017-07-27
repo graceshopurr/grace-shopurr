@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize')
 const db = require('../db')
 
+// EI: write tests for validations
+
 const DonationProduct = db.define('donationProduct', {
     name: {
       type: Sequelize.STRING,

@@ -1,6 +1,8 @@
 const Sequelize = require('sequelize');
 const db = require('../db');
 
+// EI: write tests for validations
+
 const Review = db.define('review', {
   status: {
     type: Sequelize.ENUM,
