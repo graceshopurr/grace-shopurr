@@ -154,11 +154,9 @@ function createDonationProducts () {
 
 // ORDER
 
-
 function randOrder () {
   return Order.build({
-    status: chance.weighted(['pending','shipped','delivered', 'canceled'],
-                            [25, 25, 25, 25]),
+    status: chance.weighted(['pending','shipped','delivered', 'canceled'], [25, 25, 25, 25]),
     cats: [],
     donationProducts: []
   });
@@ -171,6 +169,7 @@ function generateOrders () {
     cats: ['21'],
     donationProducts: []
   }));
+  return orders;
 }
 
 function createOrders () {
