@@ -2,12 +2,13 @@ const router = require('express').Router()
 const { DonationProduct } = require('../db/models')
 module.exports = router;
 
-// /donations - shows all donation products
-// /donations/:id - shows a particular donation product
-// /donations/new - creates a donation product
-// /donations/:id/update - updates a donation product
-// /donations/:id/delete - deletes a donation product
+// GET /donations - shows all donation products
+// GET /donations/:id - shows a particular donation product
+// POST /donations - creates a donation product
+// PUT /donations/:id - updates a donation product
+// DELETE /donations/:id - deletes a donation product
 // /donations/:id/addReview for a donation product
+// ^^ EI: POST to /reviews instead?
 
 // GET /api/donations
 router.get('/', (req, res, next) => {

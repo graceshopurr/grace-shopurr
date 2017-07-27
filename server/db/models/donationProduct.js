@@ -2,6 +2,8 @@ const Sequelize = require('sequelize')
 const db = require('../db')
 
 // EI: keep track of quantity/inventory? make sure you can't have negative quantity. also make sure users can't purchase more than is in stock (that logic may not need to be in this model).
+// EI: write tests for validations
+
 const DonationProduct = db.define('donationProduct', {
     name: {
       type: Sequelize.STRING,
