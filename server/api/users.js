@@ -1,13 +1,15 @@
 const router = require('express').Router()
 const {User} = require('../db/models')
+const {Order} = require('../db/models')
 module.exports = router
 
-// /users - shows all users
-// /users/:id - shows a particular user
-// /users/:id/update - updates a user
-// /users/:id/delete - deletes a user
-// /users/:id/addReview ? cats can review users?
+// GET /users - shows all users
+// GET /users/:id - shows a particular user
+// PUT /users/:id - updates a user
+// DELETE /users/:id - deletes a user
+// GET users/:id/orders - shows all orders for a particular user
 
+// GET /users
 router.get('/', (req, res, next) => {
   User.findAll({
     // explicitly select only the id and email fields - even though
@@ -27,6 +29,16 @@ router.get('/:userId', (req, res, next) => {
         attributes: ['id', 'email']
       })
     .then(user => res.json(user))
+    .catch(next);
+})
+
+// GET users/:id/orders
+router.get('/:userId/orders', (req, res, next) => {
+    const userId = req.params.userId;
+    Order.findAll({
+        where: {userId},
+      })
+    .then(orders => res.json(orders))
     .catch(next);
 })
 
