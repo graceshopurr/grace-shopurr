@@ -8,7 +8,8 @@ const Cat = db.define('cat', {
 		allowNull: false
 	},
 	image : {
-		type: Sequelize.STRING
+		type: Sequelize.STRING,
+		defaultValue: 'https://emojipedia-us.s3.amazonaws.com/thumbs/120/google/80/smiling-cat-face-with-heart-shaped-eyes_1f63b.png'
 	},
 	age : {
 		type: Sequelize.STRING

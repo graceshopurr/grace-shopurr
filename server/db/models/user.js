@@ -20,15 +20,21 @@ const User = db.define('user', {
   },
   isAdmin:{
     type:Sequelize.BOOLEAN
-  }, 
+  },
   billingAddress:{
-    type:Sequelize.STRING,
-  }, 
+    type:Sequelize.STRING
+  },
   shippingAddress:{
-    type:Sequelize.STRING,
-  }, 
+    type:Sequelize.STRING
+  },
   orderHistory:{
     type:Sequelize.ARRAY(Sequelize.STRING)
+  },
+  firstName: {
+    type: Sequelize.STRING
+  },
+  lastName: {
+    type: Sequelize.STRING
   }
 }
 //need to work on getter method for order history
@@ -38,7 +44,7 @@ const User = db.define('user', {
 //       // this.orderHistory.forEach(order => {})
 //     }
 //   }
-// } 
+// }
 )
 
 module.exports = User;
