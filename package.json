@@ -14,7 +14,6 @@
     "start-dev": "npm run build-client-watch & npm run start-server",
     "start-server": "NODE_ENV='development' nodemon server -e html,js,scss --ignore public",
     "test": "NODE_ENV='test' DATABASE_URL='postgres://localhost:5432/grace-shopurr-test-test' mocha ./**/*.spec.js --compilers js:babel-register"
-
   },
   "author": "",
   "license": "ISC",
@@ -29,7 +28,7 @@
     "morgan": "^1.8.1",
     "passport": "^0.3.2",
     "passport-google-oauth": "^1.0.0",
-    "pg": "^6.1.2",
+    "pg": "^6.4.1",
     "pg-hstore": "^2.3.2",
     "prop-types": "^15.5.8",
     "react": "^15.4.2",
