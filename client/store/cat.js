@@ -1,6 +1,5 @@
 import axios from 'axios'
 import history from '../history'
-import Cat from '../../server/db/models'
 
 /**
  * ACTION TYPES
@@ -110,7 +109,7 @@ export default function (state = intialState, action) {
       return action.cat
 
     case ADD_CAT:
-      return action.cat     
+      return action.cat
     case UPDATE_CAT:
       return action.cat
 
