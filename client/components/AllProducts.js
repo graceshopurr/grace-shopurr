@@ -13,7 +13,8 @@ export default class AllProducts extends Component {
 
     render() {
 
-        const products = this.state.products;
+        const products = this.state.product;
+        console.log(this.state.product);
 
         return (
             <div>
@@ -28,7 +29,7 @@ export default class AllProducts extends Component {
                                             <span>{product.name}</span>
                                         </h5>
                                         <p>{product.description}</p>
-                                        <span>${product.dollarPrice()}</span>
+
                                     </div>
                                 </Link>
                             </div>
@@ -41,4 +42,5 @@ export default class AllProducts extends Component {
 }
 
 //maybe add description of the page
-//check out getter method working 
+//check out getter method working
+// <span>${product.dollarPrice()}</span>
