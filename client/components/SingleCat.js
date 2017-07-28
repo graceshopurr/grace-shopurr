@@ -16,7 +16,7 @@ export default class SingleCat extends Component{
 		return (
 			<div>
 				<h3>{ cat.name }</h3>
-				<img src={ cat.image } className="img-thumbnail" />
+				<img src={ cat.imageURL } className="img-thumbnail" />
 				<span>
 					Status: <span className="label label-default">{cat.status}</span>
 				</span>
@@ -28,9 +28,9 @@ export default class SingleCat extends Component{
 				</span>
 				<div>
 					{ cat.specialNeeds ? <p background-color="ABE4FF">{cat.description}</p> : <p>{cat.description}</p>}
-				</div> 
+				</div>
 				{(cat.status === 'available') ? <button type="button" className="btn btn-warning">Adopt Me!</button>:null}
-			</div> 
+			</div>
 		)
 	}
 }
