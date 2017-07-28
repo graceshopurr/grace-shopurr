@@ -132,7 +132,8 @@ function randProduct () {
   return Product.build({
     name: chance.word(),
     description: chance.paragraph(),
-    price: chance.natural({min: 1, max: 1000})
+    price: chance.natural({min: 1, max: 1000}),
+    inventory: chance.natural({min: 0, max: 10000})
   });
 }
 
@@ -141,7 +142,8 @@ function generateProducts () {
   products.push(Product.build({
     name: 'Catnip',
     description: 'cat weed',
-    price: 5
+    price: 5,
+    inventory: 1000
   }));
   return products;
 }
