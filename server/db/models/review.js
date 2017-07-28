@@ -11,9 +11,13 @@ const Review = db.define('review', {
     type: Sequelize.TEXT
   },
   friendlinessRating: {
-    type: Sequelize.ENUM,
-    values: ['friendly', 'neutral', 'a little prickly']
-    //Make it a scale from 1-3 that can be averaged out? and translates to these words?
+    // 1 = 'friendly', 2 = 'neutral' (hence, default value), 3 = 'a little prickly'
+    type: Sequelize.INTEGER,
+    defaultValue: 2,
+    validate: {
+      min: 1,
+      max: 3,
+    }
   }
 });
 
