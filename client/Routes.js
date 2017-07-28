@@ -17,10 +17,7 @@ class Routes extends Component {
 
   componentDidMount () {
     this.props.loadInitialData()
-    // const catsThunk = fetchCats()
-    // const productsThunk = fetchProducts();
-    // store.dispatch(catsThunk)
-    // store.dispatch(productsThunk);   
+
   }
 
 
@@ -36,17 +33,19 @@ class Routes extends Component {
             {/* Routes placed here are available to all visitors */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
+             <Route exact path ="/products" component = {AllProducts} />
+            <Route path ="/cats" component = {AllCats} />
             {
               isLoggedIn ?
                 <Switch>
                   {/* Routes placed here are only available after logging in */}
                   <Route path="/home" component={UserHome} />
-                  <Route exact path ="/cats" component = {AllCats} />
                 </Switch> : null
             }
             {/* Displays our Login component as a fallback */}
             <Route component= {Login} />
-            <Route exact path ="/products" component = {AllProducts} />
+
+
           </Switch>
         </Main>
       </Router>
@@ -69,6 +68,10 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me())
+      const catsThunk = fetchCats()
+      const productsThunk = fetchProducts();
+      dispatch(catsThunk);
+      dispatch(productsThunk);
     }
   }
 }
