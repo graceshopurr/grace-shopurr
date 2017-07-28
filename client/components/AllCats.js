@@ -1,27 +1,15 @@
 import {React, Component} from 'react';
 import {withRouter, Link} from 'react-router-dom'
-import axios from 'axios';
+import store from '../store';
 
 
 export default class AllCats extends Component  {
 	constructor(){
 		super();
-		this.state = {
-			cats: []
-		}
+		this.state = store.getState();
 	}
-
-	componentDidMount(){
-		axios.get('/api/cats')
-		.then( res => res.data)
-		.then( cats => {
-			this.setState({ cats });
-		})
-
-	}
-
 	render(){
-		const cats = this.state.cats; 
+		const cats = this.state.cat.cats;
 		return (
 			<div>
 		      <h3>Our Cats</h3>
