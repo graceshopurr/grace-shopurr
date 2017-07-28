@@ -17,10 +17,10 @@ class Routes extends Component {
 
   componentDidMount () {
     this.props.loadInitialData()
-    const catsThunk = fetchCats()
-    const productsThunk = fetchProducts();
-    store.dispatch(catsThunk)
-    store.dispatch(productsThunk);   
+    // const catsThunk = fetchCats()
+    // const productsThunk = fetchProducts();
+    // store.dispatch(catsThunk)
+    // store.dispatch(productsThunk);   
   }
 
 
