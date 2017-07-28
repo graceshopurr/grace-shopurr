@@ -17,10 +17,10 @@ const Main = (props) => {
 
   return (
     <div className="container">
-      <div class="row-offcanvas row-offcanvas-left">
+      <div className="row-offcanvas row-offcanvas-left">
       <Sidebar />
       <div id = "main">
-        <div class="col-md-12">
+        <div className="col-md-12">
           <h1>Grace Shopurr</h1>
           <nav>
             {
