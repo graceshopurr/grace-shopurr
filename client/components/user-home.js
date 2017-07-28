@@ -5,7 +5,8 @@ import {connect} from 'react-redux'
 /**
  * COMPONENT
  */
-const UserHome = (props) => {
+
+export const UserHome = (props) => {
 
   const {email} = props
 
@@ -15,6 +16,7 @@ const UserHome = (props) => {
     </div>
   );
 };
+
 
 /**
  * CONTAINER

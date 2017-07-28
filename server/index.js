@@ -20,8 +20,10 @@ module.exports = app
  * keys as environment variables, so that they can still be read by the
  * Node process on process.env
  */
-if (process.env.NODE_ENV === 'development') require('../secrets')
 
+//if (process.env.NODE_ENV === 'development') require('../secrets')
+
+if (process.env.NODE_ENV !== 'production') require('../secrets')
 
 // passport registration
 passport.serializeUser((user, done) => done(null, user.id))
@@ -67,6 +69,9 @@ const createApp = () => {
     res.status(err.status || 500).send(err.message || 'Internal server error.')
   })
 
+}
+
+const startListening = () => {
   // start listening (and create a 'server' object representing our server)
   const server = app.listen(PORT, () => console.log(`Mixing it up on port ${PORT}`))
 
@@ -75,7 +80,7 @@ const createApp = () => {
   require('./socket')(io)
 }
 
-const syncDb = () => db.sync({})
+const syncDb = () => db.sync()
 
 // This evaluates as true when this file is run directly from the command line,
 // i.e. when we say 'node server/index.js' (or 'nodemon server/index.js', or 'nodemon server', etc)
@@ -85,6 +90,7 @@ if (require.main === module) {
   sessionStore.sync()
     .then(syncDb)
     .then(createApp)
+    .then(startListening)
 } else {
-  createApp(app)
+  createApp()
 }
