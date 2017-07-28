@@ -25,6 +25,7 @@ export default class Order extends Component{
 					JSON.stringify(cats) !== JSON.stringify([])?
 					cats.map(cat => <span> {cat.name}, age {cat.age}</span>)
 				}
+				<button className="btn btn-success btn-lg">Submit Your Order</button> 
 			<div> 
 			)
 	}
