@@ -5,6 +5,8 @@ import {withRouter, Link} from 'react-router-dom';
 import {logout} from '../store';
 import Sidebar from './Sidebar';
 
+
+
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
@@ -17,10 +19,10 @@ const Main = (props) => {
 
   return (
     <div className="container">
-      <div class="row-offcanvas row-offcanvas-left">
+      <div className="row-offcanvas row-offcanvas-left">
       <Sidebar />
       <div id = "main">
-        <div class="col-md-12">
+        <div className="col-md-12">
           <h1>Grace Shopurr</h1>
           <nav>
             {

@@ -1,6 +1,6 @@
 import axios from 'axios'
 import history from '../history'
-import Cat from '../../server/db/models'
+
 
 /**
  * ACTION TYPES
@@ -90,7 +90,7 @@ export function deleteCat(catId){
         .then(res => res.data)
         .then(deletedCat => {
             const action = removeCat(deletedCat);
-            alert("You have deleted a Cat!")
+            alert ("You have deleted a Cat!")
             dispatch(action);
         })
         .catch(error => { console.log( error) });

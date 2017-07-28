@@ -82,7 +82,7 @@ let images = [
 function randCat () {
   return Cat.build({
     name: catNames.pop(),
-    image: images.pop(),
+    imageURL: images.pop(),
     age: chance.natural({min: 0, max: 30}),
     description: chance.sentence(),
     gender: chance.weighted(['female', 'male', 'nonbinary'], [35, 35, 30]),
@@ -95,7 +95,7 @@ function generateCats () {
   let cats  = doTimes(20, randCat);
   cats.push(Cat.build({
     name: 'Gus',
-    image:'https://lh3.googleusercontent.com/-kKp7ceG98L0/WXoMdAYqanI/AAAAAAAAEdM/DprsNxHPo7EULiwQouR4SHnJ30q3UzVDQCL0BGAYYCw/h2048/462638bd-f93f-4088-b547-c83a7cee677a',
+    imageURL:'https://lh3.googleusercontent.com/-kKp7ceG98L0/WXoMdAYqanI/AAAAAAAAEdM/DprsNxHPo7EULiwQouR4SHnJ30q3UzVDQCL0BGAYYCw/h2048/462638bd-f93f-4088-b547-c83a7cee677a',
     age: '4',
     description: 'Sarah\'s Cat',
     gender: 'female',
