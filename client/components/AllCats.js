@@ -18,7 +18,7 @@ export default class AllCats extends Component  {
 		          cats.map(cat => (
 		            <div className="col-xs-4" key={ cat.id }>
 		              <Link className="thumbnail" to={`/cats/${cat.id}`}>
-		                <img src={ cat.image } />
+		                <img src={ cat.imageURL } />
 		                <div className="caption">
 		                  <h5>
 		                    <span>{ cat.name }</span>

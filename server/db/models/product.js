@@ -22,6 +22,10 @@ const Product = db.define('product', {
       validate: {
         min: 0
       }
+    },
+    imageURL : {
+      type: Sequelize.STRING,
+      defaultValue: '/assets/images/package.png'
     }
   },
 
