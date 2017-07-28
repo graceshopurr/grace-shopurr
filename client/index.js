@@ -13,12 +13,7 @@ import './socket'
 
 ReactDOM.render(
   <Provider store={store}>
-  <Router>
     <Routes />
-    <Route exact path="/" component={Main} />    
-    <Route exact path="/cats" component={AllCats} />        
-    <Route exact path="/cats" component={AllProducts} /> 
-    </Router>
   </Provider>,
   document.getElementById('app')
 )
