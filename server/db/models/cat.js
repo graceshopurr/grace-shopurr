@@ -7,10 +7,10 @@ const Cat = db.define('cat', {
 		unique: true,
 		allowNull: false
 	},
-	image : {
-		type: Sequelize.STRING,
-		defaultValue: 'https://emojipedia-us.s3.amazonaws.com/thumbs/120/google/80/smiling-cat-face-with-heart-shaped-eyes_1f63b.png'
-	},
+  imageURL : {
+    type: Sequelize.STRING,
+    defaultValue: '/assets/images/smiling-cat-face-with-heart-shaped-eyes.png'
+  },
 	age : {
 		type: Sequelize.STRING
 	},
