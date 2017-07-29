@@ -32,7 +32,7 @@ const Product = db.define('product', {
   {
     getterMethods: {
       dollarPrice: function() {
-        return this.price / 100;
+        return (this.price / 100).toFixed(2);
       }
     }
   }

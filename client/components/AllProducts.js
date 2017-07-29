@@ -29,7 +29,7 @@ export default class AllProducts extends Component {
                                             <span>{product.name}</span>
                                         </h5>
                                         <p>{product.description}</p>
-
+                                        <span>${product.dollarPrice}</span>
                                     </div>
                                 </Link>
                             </div>
