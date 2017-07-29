@@ -7,18 +7,19 @@ const Order = db.define('order', {
     values: ['cart','processing','pending','shipped','delivered', 'canceled']
   },
   date: {
-    type: Sequelize.DATE, 
+    type: Sequelize.DATE,
     defaultValue: null
+  },
+  quantity: {
+    type: Sequelize.INTEGER,
+    defaultValue: 1,
+    validate: {
+      min: 1,
+      max: 100
+    }
   }
 })
 
 module.exports = Order;
 
-  // cats: {
-  //   type: Sequelize.ARRAY(Sequelize.STRING),
-  //   defaultValue: []
-  // },
-  // products: {
-  //   type: Sequelize.ARRAY(Sequelize.STRING),
-  //   defaultValue: []
-  // }
+
