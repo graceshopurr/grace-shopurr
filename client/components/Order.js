@@ -25,8 +25,8 @@ export default class Order extends Component{
 					JSON.stringify(cats) !== JSON.stringify([])?
 					cats.map(cat => <span> {cat.name}, age {cat.age}</span>)
 				}
-			<div> 
-			)
+			</div> 
+		)
 	}
 
 } 
