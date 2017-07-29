@@ -16,6 +16,8 @@ const Review = require('./review');
 
 
  Order.belongsTo(User);
+ // Order.hasMany(Cat);
+ // Order.hasMany(Product);
 
  Review.belongsTo(Cat);
  Review.belongsTo(User);
@@ -25,7 +27,11 @@ const Review = require('./review');
  User.hasMany(Order);
  User.hasMany(Review);
 
- Cat.hasMany(Review);
+ // Cat.hasMany(Review);
+ Cat.belongsTo(Order);
+
+ Product.hasMany(Order);
+
 
 /**
  * We'll export all of our models here, so that any time a module needs a model,

@@ -158,9 +158,7 @@ function createProducts () {
 
 function randOrder () {
   return Order.build({
-    status: chance.weighted(['pending','shipped','delivered', 'canceled'], [25, 25, 25, 25]),
-    cats: [],
-    products: []
+    status: chance.weighted(['cart','processing','pending','shipped','delivered', 'canceled'], [50,10,10, 10, 10, 10]),
   });
 }
 
