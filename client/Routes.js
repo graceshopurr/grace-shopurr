@@ -1,18 +1,16 @@
-import React, {Component} from 'react'
-import {connect} from 'react-redux'
-import {Router} from 'react-router'
-import {Route, Switch} from 'react-router-dom'
-import PropTypes from 'prop-types'
-import history from './history'
-import { Login, Signup, UserHome} from './components'
-import AllCats from './components/AllCats'
+import React, {Component} from 'react';
+import {connect} from 'react-redux';
+import {Router} from 'react-router';
+import {Route, Switch} from 'react-router-dom';
+import PropTypes from 'prop-types';
+import history from './history';
+import { Login, Signup, UserHome} from './components';
+import AllCats from './components/AllCats';
 import SingleCat from './components/SingleCat';
-import AllProducts from './components/AllProducts'
+import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
-import { store, me, fetchCats, fetchProducts } from './store'
-import Root from './components/Root';
+import { store, me, fetchCats, fetchProducts } from './store';
 import Main from './components/Main';
-
 
 /**
  * COMPONENT
@@ -23,17 +21,15 @@ class Routes extends Component {
     this.props.loadInitialData();
   }
 
-
   render () {
 
-    const {isLoggedIn} = this.props
+    const {isLoggedIn} = this.props;
 
     return (
       <Router history={history}>
-        <Root>
+        <Main>
           <Switch>
             {/* Routes placed here are available to all visitors */}
-            <Route exact path="/" component={Main} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path ="/products" component = {AllProducts} />
@@ -50,7 +46,7 @@ class Routes extends Component {
             {/* Displays our Login component as a fallback */}
             <Route component= {Login} />
           </Switch>
-        </Root>
+        </Main>
       </Router>
     )
   }
@@ -74,8 +70,8 @@ const mapDispatch = (dispatch) => {
       dispatch(fetchCats());
       dispatch(fetchProducts());
     }
-  }
-}
+  };
+};
 
 export default connect(mapState, mapDispatch)(Routes);
 
