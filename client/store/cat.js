@@ -11,14 +11,10 @@ const UPDATE_CAT = 'UPDATE_CAT';
 const REMOVE_CAT = 'REMOVE_CAT';
 
 
-
 /**
  * INITIAL STATE
  */
-const intialState = {
-    cats: [],
-    cat: {}
-}
+const intialState = [];
 
 /**
  * ACTION CREATORS
@@ -56,7 +52,7 @@ export function fetchCatsById (catId) {
         })
         .catch(error => { console.log(error) });
     };
-};
+}
 
 
 export function createCat (cat ) {
@@ -64,24 +60,24 @@ export function createCat (cat ) {
         return axios.post('/api/cats', {cat})
         .then(res => res.data)
         .then(addedCat => {
-            const action = getCats(addedCat);
+            const action = addCat(addedCat);
             dispatch(action);
         })
         .catch(error => { console.log( error) });
     }
-};
+}
 
 export function changeCat (catId, cat) {
     return function thunk (dispatch){
         return axios.put(`/api/cats/${catId}`, {cat})
         .then(res => res.data)
         .then(addedCat => {
-            const action = getCatById(addedCat);
+            const action = updateCat(addedCat);
             dispatch(action);
         })
         .catch(error => { console.log( error) });
     }
-};
+}
 
 export function deleteCat(catId){
     return function thunk(dispatch){
@@ -89,7 +85,7 @@ export function deleteCat(catId){
         .then(res => res.data)
         .then(deletedCat => {
             const action = removeCat(deletedCat);
-            alert ("You have deleted a Cat!")
+            alert('You have deleted a Cat!');
             dispatch(action);
         })
         .catch(error => { console.log( error) });
@@ -103,20 +99,17 @@ export function deleteCat(catId){
 export default function (state = intialState, action) {
   switch (action.type) {
     case GET_CATS:
-      return action.cats
-
+      return action.cats;
     case GET_CAT_BY_ID:
-      return action.cat
-
+      return action.cat;
     case ADD_CAT:
-      return action.cat
+      return action.cat;
     case UPDATE_CAT:
-      return action.cat
-
+      return action.cat;
     case REMOVE_CAT:
-      return state.filter(cat => cat.id !== action.id)
+      return state.filter(cat => cat.id !== action.id);
 
     default:
-      return state
+      return state;
   }
 }

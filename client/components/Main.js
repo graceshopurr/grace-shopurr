@@ -6,7 +6,6 @@ import {logout} from '../store';
 import Sidebar from './Sidebar';
 
 
-
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything
@@ -16,36 +15,38 @@ import Sidebar from './Sidebar';
 const Main = (props) => {
 
   const {children, handleClick, isLoggedIn} = props;
-
   return (
-    <div className="container">
+     <div id = "main" className="container-fluid">
+      <div className="container">
       <div className="row-offcanvas row-offcanvas-left">
-      <Sidebar />
-      <div id = "main">
-        <div className="col-md-12">
-          <h1>Grace Shopurr</h1>
-          <nav>
-            {
-              isLoggedIn ?
-                <div>
-                  {/* The navbar will show these links after you log in */}
-                  <Link to="/home">Home</Link>
-                  <a href="#" onClick={handleClick}>Logout</a>
-                </div> :
-                <div>
-                  {/* The navbar will show these links before you log in */}
-                  <Link to="/login">Login</Link>
-                  <Link to="/signup">Sign Up</Link>
-                </div>
-            }
-          </nav>
 
-          <hr />
-          {children}
-          </div>
+          <div className="col-md-12">
+            <h1>Grace Shopurr</h1>
+            <nav>
+              {
+                isLoggedIn ?
+                  <div>
+                    {/* The navbar will show these links after you log in */}
+                    <Link to="/home">Home</Link>
+                    <a href="#" onClick={handleClick}>Logout</a>
+                  </div> :
+                  <div>
+                    {/* The navbar will show these links before you log in */}
+                    <Link to="/login">Login</Link>
+                    <Link to="/signup">Sign Up</Link>
+                  </div>
+              }
+            </nav>
+
+            <hr />
+
+            </div>
+            <Sidebar />
+
       </div>
-    </div>
-    </div>
+      {children} {/*What is rendered in the center*/}
+       </div>
+       </div>
   )
 }
 
@@ -61,14 +62,14 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     handleClick () {
-      dispatch(logout())
+      dispatch(logout());
     }
-  }
-}
+  };
+};
 
 // The `withRouter` wrapper makes sure that updates are not blocked
 // when the url changes
-export default withRouter(connect(mapState, mapDispatch)(Main))
+export default withRouter(connect(mapState, mapDispatch)(Main));
 
 /**
  * PROP TYPES

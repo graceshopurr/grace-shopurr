@@ -14,10 +14,7 @@ const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 /**
  * INITIAL STATE
  */
-const intialState = {
-    products: [],
-    product: {}
-}
+const intialState = [];
 
 /**
  * ACTION CREATORS
@@ -109,7 +106,7 @@ export default function (state = intialState, action) {
 
     case ADD_PRODUCT:
       return action.product
-           
+
     case UPDATE_PRODUCT:
       return action.product
 
