@@ -1,7 +1,7 @@
 import React , { Component} from 'react';
 import {withRouter, Link} from 'react-router-dom'
 import store from '../store';
-import { fetchCatById } from '../store/cat'
+import { addCatToCart } from '../store/cart'
 
 export default class SingleCat extends Component{
 	constructor(){
@@ -9,7 +9,6 @@ export default class SingleCat extends Component{
 		this.state = store.getState();
 	}
 
-	//unable to figure out how call fetchCatById
 
 	render(){
 		console.log(this.state);
@@ -35,7 +34,7 @@ export default class SingleCat extends Component{
 				<br /> 
 				<span>{ cat.description }</span>
 				<br />
-				{(cat.status === 'available') ? <button type="button" className="btn btn-warning">Adopt Me!</button>:null}
+				{(cat.status === 'available') ? <button onClick={addCatToCart} type="button" className="btn btn-warning">Adopt Me!</button>:null}
 			</div>
 		)
 	}

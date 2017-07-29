@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom'
 
 
-const Cart = (props) => {
+class Cart = (props) => {
 
 	var cart = [{name: 'thing'}, {name: 'thing'}, {name: 'thing'}, {name: 'thing'}]
 	//make sure to add cart route 

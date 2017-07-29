@@ -3,6 +3,7 @@ import history from '../history'
 
 //action types
 
+const CREATE_CART = 'CREATE_CART';
 const ADD_CAT_TO_CART = 'ADD_CAT_TO_CART';
 const REMOVE_CAT_FROM_CART = 'REMOVE_CAT_FROM_CART';
 const ADD_PRODUCT_TO_CART = 'ADD_PRODUCT_TO_CART';
@@ -23,6 +24,7 @@ const  initialState = {
 
 //action creators 
 
+const createCart = () => ({type: CREATE_CART})
 const addCatToCart = (catId) => ({type: ADD_CAT_TO_CART, catId})
 const removeCatFromCart = (catId) => ({type: REMOVE_CAT_FROM_CART, catId})
 const addProductToCart = (productId) => ({type: ADD_PRODUCT_TO_CART, productId})
