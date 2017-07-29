@@ -21,7 +21,7 @@ const  initialState = {
 	status: "cart" //all open carts start as 'cart' status
 }
 
-//action creators 
+//action creators
 
 const addCatToCart = (catId) => ({type: ADD_CAT_TO_CART, catId})
 const removeCatFromCart = (catId) => ({type: REMOVE_CAT_FROM_CART, catId})
@@ -31,8 +31,6 @@ const decrementProductQuantity = (productId) => ({type: DECREMENT_PRODUCT_QUANTI
 const removeProductFromCart = (productId) => ({type: REMOVE_PRODUCT_FROM_CART, productId})
 const submitOrder = () => ({type:SUBMIT_ORDER})
 const cancelOrder = () => ({type: CANCEL_ORDER})
-
-
 
 //reducer
 

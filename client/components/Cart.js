@@ -5,12 +5,12 @@ import { withRouter, Link } from 'react-router-dom'
 const Cart = (props) => {
 
 	var cart = [{name: 'thing'}, {name: 'thing'}, {name: 'thing'}, {name: 'thing'}]
-	//make sure to add cart route 
+	//make sure to add cart route
 
-	//check if items are in the cart 
+	//check if items are in the cart
 	const hasItemsInCart = false  //products.length > 0;
 
-	// condition rendering on whether items are in the cart or not 
+	// condition rendering on whether items are in the cart or not
 	const cartItems = hasItemsInCart ?
 		cart.map((item, idx) => (
 			<div key={idx} className="panel panel-default">
@@ -35,4 +35,3 @@ const Cart = (props) => {
 }
 
 export default Cart;
- 
