@@ -48,3 +48,4 @@ export default class AllProducts extends Component {
 //maybe add description of the page
 //check out getter method working
 // <span>${product.dollarPrice()}</span>
+
