@@ -1,21 +1,15 @@
-import React , { Component} from 'react';
-import {withRouter, Link} from 'react-router-dom'
-import store from '../store';
-import { fetchCatById } from '../store/cat'
+import React, { Component} from 'react';
+import { connect } from 'react-redux';
 
-export default class SingleCat extends Component{
-	constructor(){
-		super();
-		this.state = store.getState();
+class SingleCat extends Component{
+	constructor(props){
+		super(props);
 	}
 
-	//unable to figure out how call fetchCatById
-
 	render(){
-		console.log(this.state);
+		console.log(this.props);
 		const catId = this.props.match.params.catId;
-		const cat = this.state.cat.filter( cat => cat.id == catId)[0];
-		console.log(cat);
+		const cat = this.props.cat.filter(cat => cat.id.toString() === catId.toString())[0];
 		return (
 			<div>
 				<h3>{ cat.name }</h3>
@@ -31,8 +25,8 @@ export default class SingleCat extends Component{
 					Gender: <span className="label label-default"> {cat.gender} </span>
 				</span>
 				<br />
-				Who am I? 
-				<br /> 
+				Who am I?
+				<br />
 				<span>{ cat.description }</span>
 				<br />
 				{(cat.status === 'available') ? <button type="button" className="btn btn-warning">Adopt Me!</button>:null}
@@ -40,4 +34,15 @@ export default class SingleCat extends Component{
 		)
 	}
 }
+
+const mapState = (state, ownProps) => ({
+	//const paramId = Number(ownProps.match.params.id);
+	// return {
+	cat: state.cat
+	// }
+});
+
+const mapDispatch = null;
+
+export default connect(mapState, mapDispatch)(SingleCat);
 
