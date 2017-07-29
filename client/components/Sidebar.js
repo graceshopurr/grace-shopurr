@@ -31,8 +31,8 @@ export default class Sidebar extends React.Component {
       <div id="sidebar" className="sidebar-offcanvas">
           <div className="col-md-12">
             <h3>Sidebar</h3>
-            <ul className="nav ">
-              <li className="active"><Link to ="/home">Home</Link></li>
+            <ul className="">
+              <li className="active"><Link to ="/">Home</Link></li>
               <li><Link to="/cats">Cats</Link></li>
               <li><Link to="/products">Donations</Link></li>
 
