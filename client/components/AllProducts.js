@@ -47,3 +47,4 @@ const mapDispatch = null;
 
 export default connect(mapState, mapDispatch)(AllProducts);
 
+
