@@ -5,7 +5,7 @@
  */
 export {default as Main} from './Main';
 export {default as UserHome} from './user-home';
-export {Login, Signup} from './auth-form';;
+export {Login, Signup} from './auth-form';
 export {AllCats} from './AllCats';
 export {AllProducts} from './AllProducts';
 export {AddProduct, EditProduct} from './HOAdminProductForm';
