@@ -43,7 +43,7 @@ const mapState = (state) => ({
   product: state.product
 });
 
-const mapDispatch = null;
+const mapDispatch = null; //for futre use?
 
 export default connect(mapState, mapDispatch)(AllProducts);
 
