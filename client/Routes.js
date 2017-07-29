@@ -6,6 +6,7 @@ import PropTypes from 'prop-types'
 import history from './history'
 import {Main, Login, Signup, UserHome} from './components'
 import AllCats from './components/AllCats'
+import SingleCat from './components/SingleCat';
 import AllProducts from './components/AllProducts'
 import { store, me, fetchCats, fetchProducts } from './store'
 
@@ -34,7 +35,9 @@ class Routes extends Component {
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
              <Route exact path ="/products" component = {AllProducts} />
-            <Route path ="/cats" component = {AllCats} />
+             <Route path ="/cats/:catId" component = {SingleCat} />
+            <Route exact path ="/cats" component = {AllCats} />
+
             {
               isLoggedIn ?
                 <Switch>

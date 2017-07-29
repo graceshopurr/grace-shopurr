@@ -4,17 +4,21 @@ const db = require('../db');
 const Order = db.define('order', {
   status: {
     type: Sequelize.ENUM,
-    values: ['pending','shipped','delivered', 'canceled']
+    values: ['cart','processing','pending','shipped','delivered', 'canceled']
   },
-  cats: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
-    defaultValue: []
-  },
-  products: {
-    type: Sequelize.ARRAY(Sequelize.STRING),
-    defaultValue: []
+  date: {
+    type: Sequelize.DATE, 
+    defaultValue: null
   }
 })
 
 module.exports = Order;
 
+  // cats: {
+  //   type: Sequelize.ARRAY(Sequelize.STRING),
+  //   defaultValue: []
+  // },
+  // products: {
+  //   type: Sequelize.ARRAY(Sequelize.STRING),
+  //   defaultValue: []
+  // }
