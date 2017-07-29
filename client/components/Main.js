@@ -16,12 +16,9 @@ import Sidebar from './Sidebar';
 const Main = (props) => {
 
   const {children, handleClick, isLoggedIn} = props;
-
+//id = "main" ???
   return (
-    <div className="container">
-      <div className="row-offcanvas row-offcanvas-left">
-      <Sidebar />
-      <div id = "main">
+      <div>
         <div className="col-md-12">
           <h1>Grace Shopurr</h1>
           <nav>
@@ -41,11 +38,8 @@ const Main = (props) => {
           </nav>
 
           <hr />
-          {children}
           </div>
       </div>
-    </div>
-    </div>
   )
 }
 

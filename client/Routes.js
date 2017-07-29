@@ -4,12 +4,14 @@ import {Router} from 'react-router'
 import {Route, Switch} from 'react-router-dom'
 import PropTypes from 'prop-types'
 import history from './history'
-import {Main, Login, Signup, UserHome} from './components'
+import { Login, Signup, UserHome} from './components'
 import AllCats from './components/AllCats'
 import SingleCat from './components/SingleCat';
 import AllProducts from './components/AllProducts'
 import SingleProduct from './components/SingleProduct';
 import { store, me, fetchCats, fetchProducts } from './store'
+import Root from './components/Root';
+import Main from './components/Main';
 
 
 /**
@@ -18,10 +20,8 @@ import { store, me, fetchCats, fetchProducts } from './store'
 class Routes extends Component {
 
   componentDidMount () {
-    this.props.loadInitialData()
-
+    this.props.loadInitialData();
   }
-
 
 
   render () {
@@ -30,16 +30,16 @@ class Routes extends Component {
 
     return (
       <Router history={history}>
-        <Main>
+        <Root>
           <Switch>
             {/* Routes placed here are available to all visitors */}
+            <Route exact path="/" component={Main} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-             <Route exact path ="/products" component = {AllProducts} />
-             < Route path="/products/:productId" component = {SingleProduct}/>
-             <Route path ="/cats/:catId" component = {SingleCat} />
+            <Route exact path ="/products" component = {AllProducts} />
+            <Route path="/products/:productId" component = {SingleProduct} />
+            <Route path ="/cats/:catId" component = {SingleCat} />
             <Route exact path ="/cats" component = {AllCats} />
-
             {
               isLoggedIn ?
                 <Switch>
@@ -49,10 +49,8 @@ class Routes extends Component {
             }
             {/* Displays our Login component as a fallback */}
             <Route component= {Login} />
-
-
           </Switch>
-        </Main>
+        </Root>
       </Router>
     )
   }
@@ -72,16 +70,14 @@ const mapState = (state) => {
 const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
-      dispatch(me())
-      const catsThunk = fetchCats()
-      const productsThunk = fetchProducts();
-      dispatch(catsThunk);
-      dispatch(productsThunk);
+      dispatch(me());
+      dispatch(fetchCats());
+      dispatch(fetchProducts());
     }
   }
 }
 
-export default connect(mapState, mapDispatch)(Routes)
+export default connect(mapState, mapDispatch)(Routes);
 
 /**
  * PROP TYPES
