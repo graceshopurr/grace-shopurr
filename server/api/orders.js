@@ -22,6 +22,10 @@ router.get('/:orderId', (req, res, next) => {
     .catch(next);
 })
 
+// router.get(':/date', (req, res, next) => {
+//   const date = req.params.date;
+// })
+
 // POST /api/orders/
 router.post('/', (req, res, next) => {
   Order.create(req.body)

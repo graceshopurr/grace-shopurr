@@ -28,9 +28,10 @@ const Review = require('./review');
  User.hasMany(Review);
 
  // Cat.hasMany(Review);
- Cat.belongsTo(Order);
+ // Cat.belongsTo(Order);
 
  Product.hasMany(Order);
+ Order.belongsTo(Cat);
 
 
 /**
