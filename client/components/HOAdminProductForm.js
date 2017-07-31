@@ -33,6 +33,7 @@ const mapChangeProduct = (state) => {
   };
 };
 
+// It should be possible to combine the two dispatchers into a single one with a conditional, but I can't get my head around it right now. -IA
 const mapDispatchChange = (dispatch) => {
   return {
     handleSubmit(evt) {
