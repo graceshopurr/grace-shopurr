@@ -39,7 +39,6 @@ class SingleProduct extends Component {
 		const productId = this.props.match.params.productId;
 		const product = this.props.product.filter( p => Number(p.id) === Number(productId))[0];
 
-
 		return (product) ? (
 			<div>
 				<h3> { product.name } </h3>

@@ -38,10 +38,10 @@ export function fetchCats () {
         return axios.get('/api/cats')
         .then(res => res.data)
         .then(cats => {
-            const action = getCats(cats)
+            const action = getCats(cats);
             dispatch(action);
         })
-        .catch(error => { console.log('this', error) });
+        .catch(error => { console.log(error) });
     };
 }
 
@@ -66,8 +66,8 @@ export function createCat (cat ) {
             const action = addCat(addedCat);
             dispatch(action);
         })
-        .catch(error => { console.log( error) });
-    }
+        .catch(error => { console.log(error) });
+    };
 }
 
 export function changeCat (catId, cat) {
@@ -92,7 +92,7 @@ export function deleteCat(catId){
             dispatch(action);
         })
         .catch(error => { console.log( error) });
-    }
+    };
 }
 
 
@@ -100,7 +100,7 @@ export function deleteCat(catId){
  * REDUCER
  */
 export default function (state = intialState, action) {
-    let newState = Object.assign({}, state);
+  let newState = Object.assign({}, state);
   switch (action.type) {
     case GET_CATS:
       newState.cats = action.cats;
@@ -109,11 +109,11 @@ export default function (state = intialState, action) {
       newState.cat = action.cat;
       break;
     case ADD_CAT:
-      newState.cats = [action.cat, ...action.cats];
+      newState.cats = [action.cat, ...state.cats];
       break;
     case UPDATE_CAT:
-      // TODO
-      return action.cat;
+      newState.cats = state.cats.map(cat => (action.cat.id === cat.id ? action.cat : cat));
+      break;
     case REMOVE_CAT:
       newState.cats = state.cats.filter(cat => cat.id !== action.id);
       break;
