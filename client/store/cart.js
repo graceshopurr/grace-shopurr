@@ -12,6 +12,11 @@ const REMOVE_PRODUCT_FROM_CART = 'REMOVE_PRODUCT_FROM_CART';
 const SUBMIT_ORDER = 'SUBMIT_ORDER';
 const CANCEL_ORDER = 'CANCEL_ORDER';
 
+//other possibly unnecessary action types
+
+const FETCH_CART_PRODUCT = 'FETCH_CART_PRODUCT';
+const FETCH_CART_CAT = 'FETCH_CART_CAT';
+
 //initial state
 
 const  initialState = {
@@ -32,7 +37,11 @@ const removeProductFromCart = (productId) => ({type: REMOVE_PRODUCT_FROM_CART, p
 const submitOrder = () => ({type:SUBMIT_ORDER})
 const cancelOrder = () => ({type: CANCEL_ORDER})
 
-//thunks
+//other possibly unnecessary action creators
+
+const gotCartProduct = (products) => ({type: FETCH_CART_PRODUCT, products});
+const gotCartCat = (cats) => ({type: FETCH_CART_CAT, cats});
+
 
 //start cart function sets a cart on local storage find or create
 export function makeCartOnLocalStorage(){
@@ -118,7 +127,47 @@ export function decrementCat(catId){
 	localStorage.setItem('cart', cartObj);
 	console.log(localStorage.cart);
 }
+//thunk creator: fetch cart  
 
+export const fetchCartProduct = () => 
+	dispatch => {
+		const thisCart = unstringifyCart();
+		const productArr = thisCart.addedProductIds;
+		//do something about the quantities set them on state somehow?
+		Promise.map(productArr, elem => { //get products from DB based on ID
+			return axios.get(`/api/products/${elem}`)
+		})
+			.then( products => { //create dataFul products
+				return products.map(product => product.data);
+			})
+			.then(products => {//make products into dataful array of objects, WITH QUANTITIES 
+				return products.map => (product => ({quantity: thisCart.quantityById[product.id], product}))
+			})
+			.then( productCart => {
+				dispatch(gotCartProduct(productCart));
+			})
+		
+	} 
+
+export const fetchCartCat = () => 
+	dispatch => {
+		const thisCart = unstringifyCart();
+		const catArr = thisCart.addedCatIds; 
+
+		Promise.map(catArr, elem => { //get cats from DB based on ID
+			return axios.get(`/api/cats/${cat}`)
+		})
+			.then( cats => { //create dataFul cats!
+				return cats.map(cat => cat.data);
+			})
+			.then( cats => { //make cats into dataful object instead of boring old array of numbers
+				return cats.map( cat => ({[cat.id]: cat}))
+			})
+			.then(catCart => { // dispatch wonderful cart with all the database-found cats
+				dispatch(gotCartCat(catCart));
+			})
+
+	}
 //reducer
 
 export default function (state = initialState, action){
