@@ -37,12 +37,7 @@ const cancelOrder = () => ({type: CANCEL_ORDER})
 //start cart function sets a cart on local storage find or create
 export function makeCartOnLocalStorage(){
 	if(!localStorage.cart){
-		let localCart = {
-			addedProductIds : [],
-			quantityById : {}, 
-			addedCatIds : [],
-			status :"cart"
-		};
+		let localCart = initialState;
 		localCart = stringifyCart(localCart)
 		
 		localStorage.setItem('cart', localCart);
@@ -79,7 +74,6 @@ export function incrementProduct(productId){
 	if (cartObj.addedProductIds.includes(productId)){
 		cartObj.quantityById[productId]++
 	}else{
-	  console.log('hit');
 		cartObj.addedProductIds.push(productId);
 		cartObj.quantityById[productId] = 1;
 	}
@@ -133,14 +127,14 @@ export default function (state = initialState, action){
 			return Object.assign({}, state, {addedCatIds: [...state.addedCatIds, action.catId]})
 		case REMOVE_CAT_FROM_CART:
 			return Object.assign({}, state, {addedCatIds : addedCatIds.filter( cat => cat.id !== action.catId)})
-		case ADD_PRODUCT_TO_CART:
-			return Object.assign({}, state, {addedProductIds: [...state.addedProductIds, action.productId], quantityById:{...state.quantityById, [action.productId]: 1}})
+		case ADD_PRODUCT_TO_CART: 
+			return Object.assign({}, state, {addedProductIds: [...state.addedProductIds, action.productId], quantityById : Object.assign({}, state.quantityById, {[action.productId] :1})})
 		case INCREMENT_PRODUCT_QUANTITY:
-			return Object.assign({},state, {quantityById: {...state.quantityById, [action.productId]: action.productId++}})
+			return Object.assign({},state, {quantityById: Object.assign({}, state.quantityById, {[action.productId]: [action.productId] + 1})})
 		case DECREMENT_PRODUCT_QUANTITY:
-			return Object.assign({},state, {quantityById: {...state.quantityById, [action.productId]: action.productId--}})
+			return Object.assign({},state, {quantityById: Object.assign({}, state.quantityById, {[action.productId]: [action.productId] - 1})})
 		case REMOVE_PRODUCT_FROM_CART:
-			return Object.assign({}, state, {addedProductIds : addedProductIds.filter( product => product.id !== action.productId), quantityById: {...state.quantityById, [action.productId]: 0}})
+			return Object.assign({}, state, {addedProductIds : addedProductIds.filter( product => product.id !== action.productId)}, {quantityById: Object.assign({}, state.quantityById, {[action.productId]: 0})})
 		case SUBMIT_ORDER:
 			return Object.assign({}, state, { status: 'processing'})
 		case CANCEL_ORDER:
