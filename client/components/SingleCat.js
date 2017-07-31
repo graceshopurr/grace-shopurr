@@ -9,11 +9,9 @@ class SingleCat extends Component{
 
 	render(){
 		const catId = this.props.match.params.catId;
-		// const cat = (this.props.cat && this.props.cat.cats && this.props.cat.cats.length) ? this.props.cat.cats.filter(c => Number(c.id) === Number(catId))[0] : {};
 		const cat = this.props.cat.cats.filter(c => Number(c.id) === Number(catId))[0];
 
-		if (cat) {
-			return (
+			return (cat) ? (
 		   <div>
 				<h3>{ cat.name }</h3>
 				<img src={ cat.imageURL } className="img-thumbnail" />
@@ -34,9 +32,7 @@ class SingleCat extends Component{
 				<br />
 				{(cat.status === 'available') ? <button type="button" className="btn btn-warning">Adopt Me!</button>:null}
 			</div>
-			);
-		}
-		else { return (<div />); }
+			) : (<div />);
 
 	}
 }
