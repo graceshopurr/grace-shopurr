@@ -2,16 +2,19 @@ import React, { Component} from 'react';
 import { connect } from 'react-redux';
 
 class SingleCat extends Component{
+
 	constructor(props){
 		super(props);
 	}
 
 	render(){
-		console.log(this.props);
 		const catId = this.props.match.params.catId;
-		const cat = this.props.cat.filter(cat => cat.id.toString() === catId.toString())[0];
-		return (
-			<div>
+		// const cat = (this.props.cat && this.props.cat.cats && this.props.cat.cats.length) ? this.props.cat.cats.filter(c => Number(c.id) === Number(catId))[0] : {};
+		const cat = this.props.cat.cats.filter(c => Number(c.id) === Number(catId))[0];
+
+		if (cat) {
+			return (
+		   <div>
 				<h3>{ cat.name }</h3>
 				<img src={ cat.imageURL } className="img-thumbnail" />
 				<br />
@@ -31,15 +34,15 @@ class SingleCat extends Component{
 				<br />
 				{(cat.status === 'available') ? <button type="button" className="btn btn-warning">Adopt Me!</button>:null}
 			</div>
-		)
+			);
+		}
+		else { return (<div />); }
+
 	}
 }
 
-const mapState = (state, ownProps) => ({
-	//const paramId = Number(ownProps.match.params.id);
-	// return {
+const mapState = (state) => ({
 	cat: state.cat
-	// }
 });
 
 const mapDispatch = null;
