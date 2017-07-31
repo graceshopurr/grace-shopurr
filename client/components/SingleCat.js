@@ -33,7 +33,6 @@ class SingleCat extends Component{
 				{(cat.status === 'available') ? <button type="button" className="btn btn-warning">Adopt Me!</button>:null}
 			</div>
 			) : (<div />);
-
 	}
 }
 
