@@ -43,4 +43,3 @@ const mapState = (state) => ({
 const mapDispatch = null;
 
 export default connect(mapState, mapDispatch)(SingleCat);
-
