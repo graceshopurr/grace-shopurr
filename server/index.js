@@ -56,7 +56,7 @@ const createApp = () => {
 
   function checkAuthentication(req,res,next){
     if (req.isAuthenticated()){
-      let newCart = unstringifyCart(localStorage.cart); //make sure to import this function from cart store file
+      let newCart = JSON.parse(localStorage.cart);
       newCart.userId = req.user.id //where do i get user id? is this right? 
       //do i need to restringify the cart?
       Cart.create(newCart)
