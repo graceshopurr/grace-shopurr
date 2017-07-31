@@ -12,7 +12,8 @@ const reducer = combineReducers({user, cat, product, cart});
 const middleware = applyMiddleware(thunkMiddleware, createLogger({collapsed: true}));
 const store = createStore(reducer, composeWithDevTools(middleware));
 
-export default store
-export * from './user'
-export * from './cat'
-export * from './product'
+
+export default store;
+export * from './user';
+export * from './cat';
+export * from './product';
