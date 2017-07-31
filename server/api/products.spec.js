@@ -100,7 +100,7 @@ describe('Product routes', () => {
       .then(res => {
         Product.findById(1)
         .then(function(destroyed) {
-          expect (destroyed).to.be.null;
+          expect(destroyed).to.be.null;
         })
       })
     })
