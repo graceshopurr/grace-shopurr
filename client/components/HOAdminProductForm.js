@@ -14,29 +14,26 @@ const HOAdminProductForm = (props) => {
 };
 
 /* -------------- CONTAINER --------------
-/
-/ We have two different sets of 'mapStateToProps' functions -
-/ one for Edit, and one for Add. However, they share the same
-/ 'mapDispatchToProps' function, and share the same Component.
-/
+ We have two different sets of 'mapStateToProps' and 'mapDispatchToProps'functions—one for Change, and one for
+ Create. They share the same form component, AdminProductForm.
 */
-const mapEditProduct = (state) => {
+const mapCreateProduct = (state) => {
   return {
-    name: 'addProduct',
-    displayName: 'Add product',
+    name: 'createProduct',
+    displayName: 'Create product',
     error: state.product.error
   };
 };
 
-const mapAddProduct = (state) => {
+const mapChangeProduct = (state) => {
   return {
     name: 'editProduct',
-    displayName: 'Edit product',
+    displayName: 'Change product',
     error: state.product.error
   };
 };
 
-const mapDispatch = (dispatch) => {
+const mapDispatchChange = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
@@ -45,13 +42,27 @@ const mapDispatch = (dispatch) => {
       const productPrice = evt.target.productPrice.value;
       const productInventory = evt.target.productInventory.value;
       const productImageURL = evt.target.productImageURL.value;
-      dispatch(productName, productDescription, productPrice, productInventory, productImageURL)
-    }
+      dispatch(changeProduct(productName, productDescription, productPrice, productInventory, productImageURL));
+    };
   };
 };
 
-export const EditProduct = connect(mapEditProduct, mapDispatch)(AdminProductForm);
-export const AddProduct = connect(mapAddProduct, mapDispatch)(AdminProductForm);
+const mapDispatchCreate = (dispatch) => {
+  return {
+    handleSubmit(evt) {
+      evt.preventDefault()
+      const productName = evt.target.productName.value;
+      const productDescription = evt.target.productDescription.value;
+      const productPrice = evt.target.productPrice.value;
+      const productInventory = evt.target.productInventory.value;
+      const productImageURL = evt.target.productImageURL.value;
+      dispatch(createProduct(productName, productDescription, productPrice, productInventory, productImageURL));
+    };
+  };
+};
+
+export const ChangeProduct = connect(mapChangeProduct, mapDispatchChange)(AdminProductForm);
+export const CreateProduct = connect(mapCreateProduct, mapDispatchCreate)(AdminProductForm);
 
 /* -------------- PROP TYPES -------------- */
 
