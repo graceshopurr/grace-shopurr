@@ -1,5 +1,5 @@
-import axios from 'axios'
-import history from '../history'
+import axios from 'axios';
+import history from '../history';
 
 /**
  * ACTION TYPES
@@ -14,16 +14,19 @@ const REMOVE_CAT = 'REMOVE_CAT';
 /**
  * INITIAL STATE
  */
-const intialState = [];
+const intialState = {
+    cats: [],
+    cat: {}
+};
 
 /**
  * ACTION CREATORS
  */
-const getCats = (cats) => ({type: GET_CATS, cats})
-const getCatById = (cat) => ({type: GET_CAT_BY_ID, cat})
-const addCat = (cat) => ({type: ADD_CAT, cat})
-const updateCat = (cat) => ({type: UPDATE_CAT, cat})
-const removeCat = (catId) => ({type: REMOVE_CAT, catId})
+const getCats = (cats) => ({type: GET_CATS, cats});
+const getCatById = (cat) => ({type: GET_CAT_BY_ID, cat});
+const addCat = (cat) => ({type: ADD_CAT, cat});
+const updateCat = (cat) => ({type: UPDATE_CAT, cat});
+const removeCat = (catId) => ({type: REMOVE_CAT, catId});
 
 /**
  * THUNK CREATORS
@@ -97,19 +100,25 @@ export function deleteCat(catId){
  * REDUCER
  */
 export default function (state = intialState, action) {
+    let newState = Object.assign({}, state);
   switch (action.type) {
     case GET_CATS:
-      return action.cats;
+      newState.cats = action.cats;
+      break;
     case GET_CAT_BY_ID:
-      return action.cat;
+      newState.cat = action.cat;
+      break;
     case ADD_CAT:
-      return action.cat;
+      newState.cats = [action.cat, ...action.cats];
+      break;
     case UPDATE_CAT:
+      // TODO
       return action.cat;
     case REMOVE_CAT:
-      return state.filter(cat => cat.id !== action.id);
-
+      newState.cats = state.cats.filter(cat => cat.id !== action.id);
+      break;
     default:
       return state;
   }
+  return newState;
 }
