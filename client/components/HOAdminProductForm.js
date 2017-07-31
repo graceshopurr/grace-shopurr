@@ -1,6 +1,16 @@
 import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
+import AdminProductForm from './AdminProductForm';
+
+/* --------- VALUES FOR TESTING ---------- */
+
+let props = {
+  // displayName: 'Submit',
+  // error: state.user.error,
+  // existingRecord: {},
+  handleSubmit: function() {}
+};
 
 /* -------------- COMPONENT -------------- */
 
@@ -37,14 +47,14 @@ const mapChangeProduct = (state) => {
 const mapDispatchChange = (dispatch) => {
   return {
     handleSubmit(evt) {
-      evt.preventDefault()
+      evt.preventDefault();
       const productName = evt.target.productName.value;
       const productDescription = evt.target.productDescription.value;
       const productPrice = evt.target.productPrice.value;
       const productInventory = evt.target.productInventory.value;
       const productImageURL = evt.target.productImageURL.value;
       dispatch(changeProduct(productName, productDescription, productPrice, productInventory, productImageURL));
-    };
+    }
   };
 };
 
@@ -58,12 +68,12 @@ const mapDispatchCreate = (dispatch) => {
       const productInventory = evt.target.productInventory.value;
       const productImageURL = evt.target.productImageURL.value;
       dispatch(createProduct(productName, productDescription, productPrice, productInventory, productImageURL));
-    };
+    }
   };
 };
 
-export const ChangeProduct = connect(mapChangeProduct, mapDispatchChange)(AdminProductForm);
-export const CreateProduct = connect(mapCreateProduct, mapDispatchCreate)(AdminProductForm);
+export const ChangeProduct = connect(mapChangeProduct, mapDispatchChange)(HOAdminProductForm);
+export const CreateProduct = connect(mapCreateProduct, mapDispatchCreate)(HOAdminProductForm);
 
 /* -------------- PROP TYPES -------------- */
 
