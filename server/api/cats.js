@@ -23,10 +23,10 @@ router.get('/:catId', (req, res, next) => {
     .catch(next);
 })
 
-// POST /api/cats/newCat
+// POST /api/cats
 router.post('/', (req, res, next) => {
     Cat.create(req.body)
-    .then( (cat) => res.json(cat))
+    .then( (cat) => res.status(201).json(cat))
     .catch(next);
 })
 
@@ -34,7 +34,11 @@ router.post('/', (req, res, next) => {
 router.put('/:catId', (req, res, next) => {
     const id = req.params.catId;
     Cat.findById(id)
-    .then(cat => cat.update(req.body) )
+    .then(cat => cat.update(req.body))
+    .then(updated => {
+        let updatedResponse = updated.dataValues;
+        res.send({message: 'Updated sucessfully', updatedResponse})
+    })
     .catch(next);
 })
 
@@ -42,6 +46,10 @@ router.put('/:catId', (req, res, next) => {
 router.delete('/:catId', (req, res, next) => {
     const id = req.params.catId;
     Cat.findById(id)
-    .then(foundCat => {return foundCat.destroy()} )
+    .then(foundCat => {
+     foundCat.destroy()} )
+    .then(result => {
+    res.send({ message: 'Deleted successfully' })
+  })
     .catch(next);
 });
