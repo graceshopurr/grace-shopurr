@@ -56,8 +56,7 @@ export const AddProduct = connect(mapAddProduct, mapDispatch)(AdminProductForm);
 /* -------------- PROP TYPES -------------- */
 
 HOAdminProductForm.propTypes = {
-  name: PropTypes.string.isRequired,
-  displayName: PropTypes.string.isRequired,
-  handleSubmit: PropTypes.func.isRequired,
-  error: PropTypes.object
+  error: PropTypes.object,
+  existingRecord: PropTypes.object,
+  handleSubmit: PropTypes.func.isRequired
 };
