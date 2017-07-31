@@ -1,5 +1,5 @@
-import axios from 'axios'
-import history from '../history'
+import axios from 'axios';
+import history from '../history';
 
 
 /**
@@ -14,16 +14,19 @@ const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
 /**
  * INITIAL STATE
  */
-const intialState = [];
+const intialState = {
+    products: [],
+    product: {}
+};
 
 /**
  * ACTION CREATORS
  */
-const getProducts = (products) => ({type: GET_PRODUCTS, products})
-const getProductById = (productId) => ({type: GET_PRODUCT_BY_ID, productId})
-const addProduct = (product) => ({type: ADD_PRODUCT, product})
-const updateProduct = (product) => ({type: UPDATE_PRODUCT, product})
-const removeProduct = (productId) => ({type: REMOVE_PRODUCT, productId})
+const getProducts = (products) => ({type: GET_PRODUCTS, products});
+const getProductById = (productId) => ({type: GET_PRODUCT_BY_ID, productId});
+const addProduct = (product) => ({type: ADD_PRODUCT, product});
+const updateProduct = (product) => ({type: UPDATE_PRODUCT, product});
+const removeProduct = (productId) => ({type: REMOVE_PRODUCT, productId});
 
 /**
  * THUNK CREATORS
@@ -35,7 +38,7 @@ export function fetchProducts () {
         return axios.get('/api/products')
         .then(res => res.data)
         .then(products => {
-            const action = getProducts(products)
+            const action = getProducts(products);
             dispatch(action);
         })
         .catch(error => { console.log('this', error) });
@@ -52,7 +55,7 @@ export function fetchProductsById (productId) {
         })
         .catch(error => { console.log(error) });
     };
-};
+}
 
 
 export function createProduct ( product ) {
@@ -64,8 +67,8 @@ export function createProduct ( product ) {
             dispatch(action);
         })
         .catch(error => { console.log( error) });
-    }
-};
+    };
+}
 
 export function changeProduct (productId, product) {
     return function thunk (dispatch){
@@ -76,8 +79,8 @@ export function changeProduct (productId, product) {
             dispatch(action);
         })
         .catch(error => { console.log( error) });
-    }
-};
+    };
+}
 
 export function deleteProduct(productId){
     return function thunk(dispatch){
@@ -85,11 +88,11 @@ export function deleteProduct(productId){
         .then(res => res.data)
         .then(deletedProduct => {
             const action = removeProduct(deletedProduct);
-            alert ("You have deleted a Product!")
+            alert ("You have deleted a Product!");
             dispatch(action);
         })
-        .catch(error => { console.log( error) });
-    }
+        .catch(error => { console.log(error) });
+    };
 }
 
 
@@ -97,23 +100,25 @@ export function deleteProduct(productId){
  * REDUCER
  */
 export default function (state = intialState, action) {
+  let newState = Object.assign({}, state);
   switch (action.type) {
     case GET_PRODUCTS:
-      return action.products
-
+      newState.products = action.products;
+      break;
     case GET_PRODUCT_BY_ID:
-      return action.product
-
+      newState.product = action.product;
+      break;
     case ADD_PRODUCT:
-      return action.product
-
+      newState.products = [action.product, ...state.products];
+      break;
     case UPDATE_PRODUCT:
-      return action.product
-
+      newState.products = state.products.map(product => ( action.product.id === product.id ? action.product : product));
+      break;
     case REMOVE_PRODUCT:
-      return state.filter(product => product.id !== action.id)
-
+      newState.products = state.products.filter(product => product.id !== action.id);
+      break;
     default:
-      return state
+      return state;
   }
+  return newState;
 }
