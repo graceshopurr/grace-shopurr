@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 /* --------- VALUES FOR TESTING ---------- */
 
 // let props = {
+//   displayName: 'Submit',
 //   error: state.user.error,
 //   existingRecord: {},
 //   handleSubmit: function() {}
@@ -16,7 +17,7 @@ import PropTypes from 'prop-types';
 
 const AdminProductForm = (props) => {
 
-  const {error, existingRecord, handleSubmit} = props;
+  const {displayName, error, existingRecord, handleSubmit} = props;
 
   return (
     <div>
@@ -70,6 +71,7 @@ const AdminProductForm = (props) => {
 /* -------------- PROP TYPES -------------- */
 
 AuthForm.propTypes = {
+  displayName: PropTypes.string.isRequired,
   error: PropTypes.object,
   existingRecord: PropTypes.object,
   handleSubmit: PropTypes.func.isRequired
