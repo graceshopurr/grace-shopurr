@@ -32,7 +32,98 @@ const removeProductFromCart = (productId) => ({type: REMOVE_PRODUCT_FROM_CART, p
 const submitOrder = () => ({type:SUBMIT_ORDER})
 const cancelOrder = () => ({type: CANCEL_ORDER})
 
+//thunks
 
+//start cart function sets a cart on local storage find or create
+export function makeCartOnLocalStorage(){
+	if(!localStorage.cart){
+		let localCart = {
+			addedProductIds : [],
+			quantityById : {}, 
+			addedCatIds : [],
+			status :"cart"
+		};
+		localCart = stringifyCart(localCart)
+		
+		localStorage.setItem('cart', localCart);
+		console.log("your new cart: " ,localStorage.cart);
+	
+	}else{
+		console.log("Your cart contains: ", localStorage.cart);
+	}
+}
+
+
+
+function unstringifyCart(){
+	if (localStorage.cart){
+	 return	JSON.parse(localStorage.cart);
+	}else{
+	  return "There is no cart";
+	}
+}
+function stringifyCart(cart){
+	return JSON.stringify(cart);
+}
+
+export function clearCart(){
+	if(localStorage.cart){
+		localStorage.removeItem('cart');
+	}else{
+		console.log("there is no cart to clear");
+	}
+}
+
+export function incrementProduct(productId){
+	cartObj = unstringifyCart();
+	if (cartObj.addedProductIds.includes(productId)){
+		cartObj.quantityById[productId]++
+	}else{
+	  console.log('hit');
+		cartObj.addedProductIds.push(productId);
+		cartObj.quantityById[productId] = 1;
+	}
+	cartObj = stringifyCart(cartObj);
+	localStorage.setItem('cart', cartObj);
+	console.log(localStorage.cart);
+}
+
+export function decrementProduct(productId){
+	cartObj = unstringifyCart();
+	if (cartObj.quantityById[productId] > 0){
+		cartObj.quantityById[productId] --
+		if (cartObj.quantityById[productId] == 0){
+			cartObj.addedProductIds = cartObj.addedProductIds.filter( elem => elem != productId);
+		}
+	}else{
+		console.log('You cannot remove products that are not in your cart');
+	}
+
+
+	cartObj = stringifyCart(cartObj);
+	localStorage.setItem('cart', cartObj);
+	console.log(localStorage.cart);
+}
+
+export function incrementCat(catId){
+	cartObj = unstringifyCart();
+
+	cartObj.addedCatIds.push(catId);
+
+	cartObj = stringifyCart(cartObj);
+	localStorage.setItem('cart', cartObj);
+	console.log(localStorage.cart);
+}
+
+export function decrementCat(catId){
+	cartObj = unstringifyCart();
+
+	cartObj.addedCatIds = cartObj.addedCatIds.filter( elem => elem != catId);
+
+	cartObj = stringifyCart(cartObj);
+	localStorage.setItem('cart', cartObj);
+	console.log(localStorage.cart);
+}
 
 //reducer
 
@@ -58,3 +149,5 @@ export default function (state = initialState, action){
 			return state
 	}
 }
+
+

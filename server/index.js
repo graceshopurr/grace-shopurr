@@ -50,6 +50,27 @@ const createApp = () => {
   app.use(passport.initialize())
   app.use(passport.session())
 
+  // convert local storage cart to DB cart HERE!!! 
+  //helper function for middleware goals:  if user is logged in a) check localStorage for cart, 
+//  then b) check DB for "open cart", DO I HAVE TO COMBINE THE CARTS or can i just pick one?
+
+  function checkAuthentication(req,res,next){
+    if (req.isAuthenticated()){
+      let newCart = unstringifyCart(localStorage.cart); //make sure to import this function from cart store file
+      newCart.userId = req.user.id //where do i get user id? is this right? 
+      //do i need to restringify the cart?
+      Cart.create(newCart)
+        .then(cart => res.status(201).json(cart))
+     
+    }
+     next();
+  }
+
+  app.use(checkAuthentication)
+
+
+
+
   // auth and api routes
   app.use('/auth', require('./auth'))
   app.use('/api', require('./api'))
