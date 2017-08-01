@@ -6,13 +6,32 @@ class AllCats extends Component {
 
 	constructor(props){
 		super(props);
+		this.state = {
+			filter: ['available', 'adopted', 'all']
+		};
+		this.handleFilter = this.handleFilter.bind(this);
+	}
+
+	handleFilter (event){
+		if (event.target.value === 'all') this.setState({filter: ['available', 'adopted', 'all']});
+		else this.setState({filter: [event.target.value]});
 	}
 
 	render(){
-		const cats = this.props.cat.catList;
+		let cats = this.props.cat.catList;
+		cats = cats.filter(cat => this.state.filter.includes(cat.status));
 		return (
 			<div className="AllCats">
 		    <h3>Our Cats</h3>
+		    <p>  &nbsp; Filter: &nbsp;
+		    <button type="button" className='btn btn-primary' value="all" onClick={this.handleFilter}>All</button> &nbsp;
+		    	<button type="button" className='btn btn-primary' value="available" onClick={this.handleFilter}>Available</button> &nbsp;
+
+		    	<button type="button" className='btn btn-primary' value="pending" onClick={this.handleFilter}>Pending</button> &nbsp;
+
+		    	<button type="button" className='btn btn-primary' value="adopted" onClick={this.handleFilter}>Adopted</button>
+		    </p>
+		    <hr />
 				<div className="row">
 					{
 						cats.map(cat => (

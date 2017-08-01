@@ -132,7 +132,7 @@ function randProduct () {
   return Product.build({
     name: chance.word(),
     description: chance.paragraph(),
-    price: chance.natural({min: 1, max: 1000}),
+    price: chance.natural({min: 100, max: 10000}),
     inventory: chance.natural({min: 0, max: 10000})
   });
 }
