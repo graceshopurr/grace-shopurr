@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import { withRouter, Link } from 'react-router-dom'
 
+import { fetchCartProduct,fetchCartCat } from '../store/cart';
+
+
+
 
 const Cart = (props) => {
 

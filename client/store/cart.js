@@ -127,6 +127,7 @@ export function decrementCat(catId){
 	localStorage.setItem('cart', cartObj);
 	console.log(localStorage.cart);
 }
+
 //thunk creator: fetch cart  
 
 export const fetchCartProduct = () => 
