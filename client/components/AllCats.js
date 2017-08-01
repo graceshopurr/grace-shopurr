@@ -7,7 +7,6 @@ class AllCats extends Component {
 	constructor(props){
 		super(props);
 	}
-
 	render(){
 		const cats = this.props.cat.cats;
 		// console.log('props here', this.props);

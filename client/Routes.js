@@ -21,6 +21,8 @@ class Routes extends Component {
     this.props.loadInitialData();
   }
 
+
+
   render () {
 
     const {isLoggedIn} = this.props;
@@ -43,10 +45,12 @@ class Routes extends Component {
                 <Switch>
                   {/* Routes placed here are only available after logging in */}
                   <Route path="/home" component={UserHome} />
+                  <Route exact path ="/cats" component = {AllCats} />
                 </Switch> : null
             }
             {/* Displays our Login component as a fallback */}
-            <Route component={Login} />
+            <Route component= {Login} />
+            <Route exact path ="/products" component = {AllProducts} />
           </Switch>
         </Main>
       </Router>
