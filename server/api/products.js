@@ -2,12 +2,12 @@ const router = require('express').Router()
 const { Product } = require('../db/models')
 module.exports = router;
 
-// /products - shows all products
-// /products/:id - shows a particular product
-// /products/new - creates a product
-// /products/:id/update - updates a product
-// /products/:id/delete - deletes a product
-// /products/:id/addReview for a product
+// GET /products - shows all products
+// GET /products/:id - shows a particular product
+// POST /products/new - creates a product
+// PUT /products/:id/update - updates a product
+// DELETE /products/:id/delete - deletes a product
+// POST /products/:id/addReview for a product - not implemented
 
 // GET /api/products
 router.get('/', (req, res, next) => {
@@ -26,7 +26,7 @@ router.get('/:productId', (req, res, next) => {
 // POST /api/products/
 router.post('/', (req, res, next) => {
   Product.create(req.body)
-    .then((product) => res.json(product))
+    .then((product) => res.status(201).json(product))
     .catch(next);
 })
 
@@ -34,14 +34,24 @@ router.post('/', (req, res, next) => {
 router.put('/:productId', (req, res, next) => {
   const id = req.params.productId;
   Product.findById(id)
-    .then(product => product.update(req.body))
-    .catch(next);
+  .then(product => product.update(req.body))
+  // .then(product => res.json(product))
+  .then(updated => {
+    let updateResponse = updated.dataValues;
+    res.send({ message: 'Updated successfully', updateResponse})
+  })
+  .catch(next);
 })
 
 // DELETE /api/products/:productId
 router.delete('/:productId', (req, res, next) => {
   const id = req.params.productId;
   Product.findById(id)
-    .then(foundProduct => { return foundProduct.destroy() })
-    .catch(next);
+  .then(foundProduct => {
+    foundProduct.destroy()
+  })
+  .then(result => {
+    res.send({ message: 'Deleted successfully' })
+  })
+  .catch(next);
 });

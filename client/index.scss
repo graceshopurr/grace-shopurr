@@ -1,8 +1,11 @@
+@import url('https://fonts.googleapis.com/css?family=Kavoon|Source+Sans+Pro:400,400i,700,700i,900,900i');
+
 body {
-  font-family: sans-serif;
+  font-family: 'Source Sans Pro', sans-serif;
 
   a {
     text-decoration: none;
+    color: #369;
   }
 
   label {
@@ -20,47 +23,76 @@ body {
   }
 }
 
-body,html,.row-offcanvas {
-  height:100%;
+body,
+html,
+.row-offcanvas {
+  height: 100%;
 }
 
 body {
   padding-top: 50px;
 }
+
 img {
-  width: 200px; 
+  width: 200px;
 }
+
+// ---------------- Main component ----------------
+.MainTitle {
+  font-family: 'Kavoon', cursive;
+}
+
+#main {
+  height: 100%;
+  overflow: auto;
+}
+
+// ---------------- Sidebar component ----------------
 #sidebar {
   width: inherit;
   min-width: 220px;
   max-width: 220px;
-  background-color:#f5f5f5;
+  background-color: #f5f5f5;
   float: left;
-  height:100%;
-  position:relative;
-  overflow-y:auto;
-  overflow-x:hidden;
-}
-#main {
-  height:100%;
-  overflow:auto;
+  height: 100%;
+  position: relative;
+  overflow-y: auto;
+  overflow-x: hidden;
+  height: 100vh;
+  border-radius: 5px;
+  margin-left: 15px;
+
+  .btn-primary {
+      background-color: #399;
+      border-color: #399;
+      margin-top: 5px;
+    }
+
+  .sidebarUl {
+    list-style-type: none;
+    padding-left: 0;
+  }
+
+  .sidebarUl li {
+    background-color: rgba(51, 153, 94, 0.1);
+    padding: 10px;
+    margin: 10px 0;
+    border-radius: 5px;
+  }
 }
 
-/*
- * off Canvas sidebar
- * --------------------------------------------------
- */
+  // -------------- off Canvas sidebar --------------
+
 @media screen and (max-width: 768px) {
   .row-offcanvas {
     position: relative;
     -webkit-transition: all 0.25s ease-out;
     -moz-transition: all 0.25s ease-out;
     transition: all 0.25s ease-out;
-    width:calc(100% + 220px);
+    width: calc(100% + 220px);
   }
 
-  .row-offcanvas-left
-  {
+  .row-offcanvas-left {
     left: -220px;
   }
 
@@ -72,4 +104,31 @@ img {
     position: absolute;
     top: 0;
   }
+}
+
+// ---------------- AdminProductForm Component ----------------
+.AdminProductForm {
+  label {
+    font-weight: bold;
+    margin-left: 15px;
+  }
+}
+
+// ---------------- AllCats component ----------------
+.AllCats {
+    .btn-primary {
+      background-color: #399;
+      border-color: #399;
+      margin-top: 5px;
+    }
+
+}
+
+// ---------------- AllProducts component ----------------
+.AllProducts {
+    .btn-primary {
+      background-color: #399;
+      border-color: #399;
+      margin-top: 5px;
+    }
 }

@@ -1,122 +1,87 @@
-import axios from 'axios'
-import history from '../history'
+import axios from 'axios';
+import history from '../history';
 
 /**
  * ACTION TYPES
  */
-const GET_CATS = 'GET_CATS';
-const GET_CAT_BY_ID = 'GET_CAT_BY_ID';
-const ADD_CAT = 'ADD_CAT';
-const UPDATE_CAT = 'UPDATE_CAT';
-const REMOVE_CAT = 'REMOVE_CAT';
-
-
+const GET_CAT_LIST = 'GET_CAT_LIST';
+const GET_SINGLE_CAT = 'GET_SINGLE_CAT';
 
 /**
  * INITIAL STATE
  */
 const intialState = {
-    cats: [],
-    cat: {}
-}
+    catList: [],
+    singleCat: {}
+};
 
 /**
  * ACTION CREATORS
  */
-const getCats = (cats) => ({type: GET_CATS, cats})
-const getCatById = (cat) => ({type: GET_CAT_BY_ID, cat})
-const addCat = (cat) => ({type: ADD_CAT, cat})
-const updateCat = (cat) => ({type: UPDATE_CAT, cat})
-const removeCat = (catId) => ({type: REMOVE_CAT, catId})
+const getCatList = (catList) => ({type: GET_CAT_LIST, catList});
+const getSingleCat = (singleCat) => ({type: GET_SINGLE_CAT, singleCat});
 
 /**
  * THUNK CREATORS
  */
 
-export function fetchCats () {
+export function fetchCatList () {
     return function thunk (dispatch){
-        //sends axios request to get all cats
         return axios.get('/api/cats')
-        .then(res => res.data)
-        .then(cats => {
-            const action = getCats(cats)
-            dispatch(action);
-        })
-        .catch(error => { console.log('this', error) });
+        .then(res => dispatch(getCatList(res.data)))
+        .catch(error => { console.log(error) });
     };
 }
 
-export function fetchCatsById (catId) {
+export function fetchSingleCat (catId) {
+  console.log('fetch single cat');
     return function thunk (dispatch){
-        return axios.get(`/api/cat/${catId}`)
-        .then(res => res.data)
-        .then(cat => {
-            const action = getCatById(cat);
-            dispatch(action);
+        return axios.get(`/api/cats/${catId}`)
+        .then(res => {
+          dispatch(getSingleCat(res.data))
+          console.log(res.data);
         })
         .catch(error => { console.log(error) });
     };
-};
-
+}
 
 export function createCat (cat ) {
     return function thunk (dispatch){
         return axios.post('/api/cats', {cat})
-        .then(res => res.data)
-        .then(addedCat => {
-            const action = getCats(addedCat);
-            dispatch(action);
-        })
-        .catch(error => { console.log( error) });
-    }
-};
+        .then(res => dispatch(getSingleCat(res.data)))
+        .catch(error => { console.log(error) });
+    };
+}
 
 export function changeCat (catId, cat) {
     return function thunk (dispatch){
         return axios.put(`/api/cats/${catId}`, {cat})
-        .then(res => res.data)
-        .then(addedCat => {
-            const action = getCatById(addedCat);
-            dispatch(action);
-        })
-        .catch(error => { console.log( error) });
-    }
-};
-
-export function deleteCat(catId){
-    return function thunk(dispatch){
-        return axios.delete(`/api/cats/${catId}`)
-        .then(res => res.data)
-        .then(deletedCat => {
-            const action = removeCat(deletedCat);
-            alert ("You have deleted a Cat!")
-            dispatch(action);
-        })
-        .catch(error => { console.log( error) });
+        .then(res => dispatch(getSingleCat(res.data)))
+        .catch(error => { console.log(error) });
     }
 }
 
+export function deleteCat(catId){
+    return function thunk(){
+        return axios.delete(`/api/cats/${catId}`)
+        .catch(error => { console.log( error) });
+    };
+}
 
 /**
  * REDUCER
  */
 export default function (state = intialState, action) {
+  let newState = Object.assign({}, state);
   switch (action.type) {
-    case GET_CATS:
-      return action.cats
-
-    case GET_CAT_BY_ID:
-      return action.cat
-
-    case ADD_CAT:
-      return action.cat
-    case UPDATE_CAT:
-      return action.cat
-
-    case REMOVE_CAT:
-      return state.filter(cat => cat.id !== action.id)
-
+    case GET_CAT_LIST:
+      newState.catList = action.catList;
+      break;
+    case GET_SINGLE_CAT:
+      newState.singleCat = action.singleCat;
+      break;
     default:
-      return state
+      return state;
   }
+  return newState;
 }

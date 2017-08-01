@@ -118,7 +118,7 @@ function randReview () {
   return Review.build({
     status: chance.weighted(['pending', 'approved'], [10, 90]),
     review: chance.paragraph(),
-    rating: chance.weighted(['friendly', 'neutral', 'a little prickly'], [40, 40, 20])
+    rating: chance.weighted([1, 2, 3], [40, 40, 20])
   });
 }
 
@@ -132,7 +132,7 @@ function randProduct () {
   return Product.build({
     name: chance.word(),
     description: chance.paragraph(),
-    price: chance.natural({min: 1, max: 1000}),
+    price: chance.natural({min: 100, max: 10000}),
     inventory: chance.natural({min: 0, max: 10000})
   });
 }

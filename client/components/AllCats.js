@@ -1,57 +1,61 @@
 import React, {Component} from 'react';
-import {withRouter, Link} from 'react-router-dom'
-import store from '../store';
+import { connect } from 'react-redux';
+import { withRouter, Link } from 'react-router-dom';
 
+class AllCats extends Component {
 
-export default class AllCats extends Component  {
-	constructor(){
-		super();
-		this.state = store.getState();
+	constructor(props){
+		super(props);
+		this.state = {
+			filter: ['available', 'adopted', 'all']
+		};
+		this.handleFilter = this.handleFilter.bind(this);
+	}
+
+	handleFilter (event){
+		if (event.target.value === 'all') this.setState({filter: ['available', 'adopted', 'all']});
+		else this.setState({filter: [event.target.value]});
 	}
 
 	render(){
-		 const cats = this.state.cat;
-		console.log(this.state);
+		let cats = this.props.cat.catList;
+		cats = cats.filter(cat => this.state.filter.includes(cat.status));
 		return (
-			<div>
-		      <h3>Our Cats</h3>
-		       <div className="row">
-		         {
-		          cats.map(cat => (
-		            <div className="col-xs-4" key={ cat.id }>
-		              <Link className="thumbnail" to={`/cats/${cat.id}`}>
-		                <img src={ cat.imageURL } />
-		                <div className="caption">
-		                  <h5>
-		                    <span>{ cat.name }</span>
-		                  </h5>
-		              	 {cat.status === 'adopted' ? <span className="label label-primary">{cat.status}</span> : <span className="label label-success">{cat.status}</span>}
-		                </div>
-		              </Link>
-		            </div>
-		          ))
-		        }
-		      </div>
-    		</div>
-			)
+			<div className="AllCats">
+		    <h3>Our Cats</h3>
+		    <p>  &nbsp; Filter: &nbsp;
+		    <button type="button" className='btn btn-primary' value="all" onClick={this.handleFilter}>All</button> &nbsp;
+		    	<button type="button" className='btn btn-primary' value="available" onClick={this.handleFilter}>Available</button> &nbsp;
+
+		    	<button type="button" className='btn btn-primary' value="pending" onClick={this.handleFilter}>Pending</button> &nbsp;
+
+		    	<button type="button" className='btn btn-primary' value="adopted" onClick={this.handleFilter}>Adopted</button>
+		    </p>
+		    <hr />
+				<div className="row">
+					{
+						cats.map(cat => (
+						  <figure className="col-xs-4" key={ cat.id }>
+						    <Link className="thumbnail" to={`/cats/${cat.id}`}>
+						      <img src={ cat.imageURL } alt="{ cat.name } the cat" />
+						      <figcaption className="caption">
+						        <h5>{ cat.name }</h5>
+						    	 {cat.status === 'adopted' ? <span className="label label-primary">{cat.status}</span> : <span className="label label-success">{cat.status}</span>}
+						      </figcaption>
+						    </Link>
+						  </figure>
+						))
+					}
+				</div>
+			</div>
+		);
 	}
 }
 
+const mapState = (state) => ({
+	cat: state.cat
+});
 
-		      // <div className="row">
-		      //   {
-		      //     cats.map(cat => (
-		      //       <div className="col-xs-4" key={ cat.id }>
-		      //         <Link className="thumbnail" to={`/cats/${cat.id}`}>
-		      //           <img src={ cat.imageURL } />
-		      //           <div className="caption">
-		      //             <h5>
-		      //               <span>{ cat.name }</span>
-		      //             </h5>
-		      //         	 {cat.status === 'adopted' ? <span className="label label-primary">{cat.status}</span> : <span className="label label-success">{cat.status}</span>}
-		      //           </div>
-		      //         </Link>
-		      //       </div>
-		      //     ))
-		      //   }
-		      // </div>
+const mapDispatch = null;
+
+export default connect(mapState, mapDispatch)(AllCats);

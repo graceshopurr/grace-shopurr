@@ -1,23 +1,23 @@
-import React , { Component} from 'react';
-import {withRouter, Link} from 'react-router-dom'
-import store from '../store';
-import { fetchCatById } from '../store/cat'
+import React, { Component} from 'react';
+import { connect } from 'react-redux';
+import { fetchSingleCat } from '../store';
 
-export default class SingleCat extends Component{
-	constructor(){
-		super();
-		this.state = store.getState();
+class SingleCat extends Component{
+
+	constructor(props){
+		super(props);
 	}
 
-	//unable to figure out how call fetchCatById
+	componentDidMount() {
+		let catId = this.props.match.params.catId;
+		this.props.loadData(catId);
+	}
 
 	render(){
-		console.log(this.state);
-		const catId = this.props.match.params.catId;
-		const cat = this.state.cat.filter( cat => cat.id == catId)[0];
-		console.log(cat);
-		return (
-			<div>
+		const cat = this.props.cat.singleCat;
+
+			return (cat) ? (
+		   <div>
 				<h3>{ cat.name }</h3>
 				<img src={ cat.imageURL } className="img-thumbnail" />
 				<br />
@@ -31,13 +31,28 @@ export default class SingleCat extends Component{
 					Gender: <span className="label label-default"> {cat.gender} </span>
 				</span>
 				<br />
-				Who am I? 
-				<br /> 
+				Who am I?
+				<br />
 				<span>{ cat.description }</span>
 				<br />
 				{(cat.status === 'available') ? <button type="button" className="btn btn-warning">Adopt Me!</button>:null}
 			</div>
-		)
+			) : (<div />);
+
 	}
 }
+
+const mapState = (state) => ({
+	cat: state.cat
+});
+
+const mapDispatch = (dispatch) => {
+	return {
+		loadData(catId) {
+			dispatch(fetchSingleCat(catId));
+		}
+	};
+};
+
+export default connect(mapState, mapDispatch)(SingleCat);
 
