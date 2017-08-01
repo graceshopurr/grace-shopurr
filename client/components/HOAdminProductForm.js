@@ -2,49 +2,85 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 import AdminProductForm from './AdminProductForm';
+import { createProduct, changeProduct } from '../store/product.js';
 
 /* --------- VALUES FOR TESTING ---------- */
 
-let props = {
-  // displayName: 'Submit',
-  // error: state.user.error,
-  // existingRecord: {},
-  handleSubmit: function() {}
-};
+// let props = {
+//   displayName: 'Submit',
+//   error: state.user.error,
+//   existingRecord: {},
+//   handleSubmit: function() {}
+// };
+
+/* -------- Misc. crap I'm not sure what to do with ---------- */
+
+  // const {handleSubmit, error} = props;
+  // const existingRecord = props.existingRecord ? props.existingRecord : {};
+  // return (
+  //   <AdminProductForm handleSubmit={handleSubmit} error={error} />
+  // );
 
 /* -------------- COMPONENT -------------- */
 
-const HOAdminProductForm = (props) => {
+function HOAdminProductForm(Component, thunkCreator) {
+  return class extends React.Component {
+    constructor(props) {
+      super(props);
+      this.state = {};
+      this.handleChange = this.handleChange.bind(this);
+      this.handleSubmit = this.handleSubmit.bind(this);
+    }
 
-  const {handleSubmit, error} = props;
-  // const existingRecord = props.existingRecord ? props.existingRecord : {};
-  return (
-    <AdminProductForm handleSubmit={handleSubmit} error={error} />
-  );
-};
+    handleChange(evt) {
+      this.setState({
+        [evt.target.name]: evt.target.value
+      })
+    }
+
+    handleSubmit(evt) {
+      evt.preventDefault();
+      console.log('this.state:', this.state);
+      console.log('this.props:', this.props);
+      const name = this.state.productName;
+      const description = this.state.productDescription;
+      const price = this.state.productPrice;
+      const inventory = this.state.productInventory;
+      const imageURL = this.state.productImageURL;
+      store.dispatch(thunkCreator(name, description, price, inventory, imageURL));
+      // this.setState({});
+    }
+
+    render() {
+      return(
+        <Component handleSubmit={this.handleSubmit} handleChange={this.handleChange} {...this.props} />
+      )
+    }
+  }
+}
 
 /* -------------- CONTAINER --------------
  We have two different sets of 'mapStateToProps' and 'mapDispatchToProps'functions—one for Change, and one for
  Create. They share the same form component, AdminProductForm.
 */
-const mapCreateProduct = (state) => {
+const mapAddProduct = (state) => {
   return {
     name: 'createProduct',
-    displayName: 'Create product',
+    displayName: 'Add product',
     error: state.product.error
   };
 };
 
-const mapChangeProduct = (state) => {
+const mapEditProduct = (state) => {
   return {
-    name: 'editProduct',
-    displayName: 'Change product',
+    name: 'changeProduct',
+    displayName: 'Edit product',
     error: state.product.error
   };
 };
 
 // It should be possible to combine the two dispatchers into a single one with a conditional, but I can't get my head around it right now. -IA
-const mapDispatchChange = (dispatch) => {
+const mapDispatchEdit = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault();
@@ -58,7 +94,7 @@ const mapDispatchChange = (dispatch) => {
   };
 };
 
-const mapDispatchCreate = (dispatch) => {
+const mapDispatchAdd = (dispatch) => {
   return {
     handleSubmit(evt) {
       evt.preventDefault()
@@ -72,13 +108,13 @@ const mapDispatchCreate = (dispatch) => {
   };
 };
 
-export const ChangeProduct = connect(mapChangeProduct, mapDispatchChange)(HOAdminProductForm);
-export const CreateProduct = connect(mapCreateProduct, mapDispatchCreate)(HOAdminProductForm);
+export const EditProduct = connect(mapEditProduct, mapDispatchEdit)(HOAdminProductForm(AdminProductForm, changeProduct));
+export const AddProduct = connect(mapAddProduct, mapDispatchAdd)(HOAdminProductForm(AdminProductForm, createProduct));
 
 /* -------------- PROP TYPES -------------- */
 
-HOAdminProductForm.propTypes = {
-  error: PropTypes.object,
-  existingRecord: PropTypes.object,
-  handleSubmit: PropTypes.func.isRequired
-};
+// HOAdminProductForm.propTypes = {
+//   error: PropTypes.object,
+//   existingRecord: PropTypes.object,
+//   handleSubmit: PropTypes.func.isRequired
+// };

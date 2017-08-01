@@ -9,7 +9,7 @@ class AllProducts extends Component {
   }
 
   render() {
-    const products = this.props.product;
+    const products = this.props.product.products;
 
     return (
       <div>

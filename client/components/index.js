@@ -8,4 +8,4 @@ export {default as UserHome} from './user-home';
 export {Login, Signup} from './auth-form';;
 export {AllCats} from './AllCats';
 export {AllProducts} from './AllProducts';
-export {CreateProduct, ChangeProduct} from './HOAdminProductForm';
+export {AddProduct, EditProduct} from './HOAdminProductForm';

@@ -4,8 +4,10 @@ import {Router} from 'react-router';
 import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
-import { Login, Signup, UserHome, ChangeProduct, CreateProduct, AllCats, AllProducts} from './components';
+import { Login, Signup, UserHome, EditProduct, AddProduct} from './components';
+import AllCats from './components/AllCats';
 import SingleCat from './components/SingleCat';
+import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
 import { store, me, fetchCats, fetchProducts } from './store';
 import Main from './components/Main';
@@ -30,12 +32,12 @@ class Routes extends Component {
             {/* Routes placed here are available to all visitors */}
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route exact path="/products/add" component={CreateProduct} />
-            <Route path="/products/edit" component={ChangeProduct} />
             <Route exact path ="/products" component = {AllProducts} />
+            <Route exact path="/products/add" component={AddProduct} />
+            <Route path="/products/edit" component={EditProduct} />
             <Route path="/products/:productId" component = {SingleProduct} />
-            <Route path ="/cats/:catId" component = {SingleCat} />
             <Route exact path ="/cats" component = {AllCats} />
+            <Route path ="/cats/:catId" component = {SingleCat} />
             {
               isLoggedIn ?
                 <Switch>

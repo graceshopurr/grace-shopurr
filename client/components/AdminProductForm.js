@@ -16,16 +16,16 @@ import PropTypes from 'prop-types';
 /* -------------- COMPONENT -------------- */
 
 const AdminProductForm = (props) => {
-
-  const {displayName, error, existingRecord, handleSubmit} = props;
+  // console.log('props:',props);
+  const {displayName, error, existingRecord} = props;
 
   return (
     <div className="AdminProductForm">
-      <form onSubmit={handleSubmit} className="form-horizontal">
+      <form onSubmit={props.handleSubmit} className="form-horizontal">
         <div className="form-group row">
           <label className="col-lg-6 col-md-8 col-form-label control-label" htmlFor="productName">* Name</label>
           <div className="col-lg-6 col-md-8">
-            <input id="productName" name="productName" type="text" placeholder="e.g., '40 lb. bag of litter'" className="form-control input-md" required="" />
+            <input id="productName" name="productName" type="text" placeholder="e.g., '40 lb. bag of litter'" className="form-control input-md" required="" onChange={props.handleChange} />
             <span className="help-block">A product name is required</span>
           </div>
         </div>
@@ -33,14 +33,14 @@ const AdminProductForm = (props) => {
         <div className="form-group row">
           <label className="col-lg-6 col-md-8 col-form-label control-label" htmlFor="productDescription">Description</label>
           <div className="col-lg-6 col-md-8">
-            <textarea className="form-control" id="productDescription" name="productDescription"></textarea>
+            <textarea className="form-control" id="productDescription" name="productDescription" onChange={props.handleChange}></textarea>
           </div>
         </div>
 
         <div className="form-group row">
           <label className="col-lg-6 col-md-8 col-form-label control-label" htmlFor="productPrice">Price</label>
           <div className="col-lg-6 col-md-8">
-            <input id="productPrice" name="productPrice" type="text" placeholder="e.g., '500' for $5; defaults to 0" className="form-control input-md" />
+            <input id="productPrice" name="productPrice" type="text" placeholder="e.g., '500' for $5; defaults to 0" className="form-control input-md" onChange={props.handleChange} />
             <span className="help-block">Enter the price in cents (until we find a better way to handle this)</span>
           </div>
         </div>
@@ -48,7 +48,7 @@ const AdminProductForm = (props) => {
         <div className="form-group row">
           <label className="col-lg-6 col-md-8 col-form-label control-label" htmlFor="productInventory">Inventory</label>
           <div className="col-lg-6 col-md-8">
-            <input id="productInventory" name="productInventory" type="text" placeholder="0" className="form-control input-md" />
+            <input id="productInventory" name="productInventory" type="text" placeholder="0" className="form-control input-md" onChange={props.handleChange} />
             <span className="help-block">How many units are available?</span>
           </div>
         </div>
@@ -56,7 +56,7 @@ const AdminProductForm = (props) => {
         <div className="form-group row">
           <label className="col-lg-6 col-md-8 col-form-label control-label" htmlFor="productImageURL">Image URL</label>
           <div className="col-lg-6 col-md-8">
-            <input id="productImageURL" name="productImageURL" type="text" placeholder="defaults to '/assets/images/package.png'" className="form-control input-md" />
+            <input id="productImageURL" name="productImageURL" type="text" placeholder="defaults to '/assets/images/package.png'" className="form-control input-md" onChange={props.handleChange} />
             <span className="help-block">A fully qualified URL (http://…)</span>
           </div>
         </div>
