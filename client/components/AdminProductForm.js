@@ -1,4 +1,4 @@
-// This is a dumb form component, meant to be called by a higher-order component that will supply a handleSubmit and, if the form is being used to edit an existing record, that record's previous values.
+// This is a dumb form component, meant to be called by a higher-order component (HOAdminProductForm) that will supply a handleSubmit and, if the form is being used to edit an existing record, that record's previous values.
 
 import React from 'react';
 import {connect} from 'react-redux';
@@ -20,7 +20,7 @@ const AdminProductForm = (props) => {
   const {displayName, error, existingRecord} = props;
 
   return (
-    <div className="AdminProductForm">
+    <div className="AdminProductForm col-lg-9 offset-lg-3">
       <form onSubmit={props.handleSubmit} className="form-horizontal">
         <div className="form-group row">
           <label className="col-lg-6 col-md-8 col-form-label control-label" htmlFor="productName">* Name</label>
