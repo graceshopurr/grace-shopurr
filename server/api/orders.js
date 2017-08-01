@@ -29,7 +29,7 @@ router.get('/:orderId', (req, res, next) => {
 // POST /api/orders/
 router.post('/', (req, res, next) => {
   Order.create(req.body)
-    .then((order) => res.json(order))
+    .then( (order) => res.status(201).json(order))
     .catch(next);
 })
 
@@ -38,6 +38,10 @@ router.put('/:orderId', (req, res, next) => {
   const id = req.params.orderId;
   Order.findById(id)
     .then(order => order.update(req.body))
+    .then(updated => {
+        let updatedResponse = updated.dataValues;
+        res.send({message: 'Updated sucessfully', updatedResponse})
+    })
     .catch(next);
 })
 
@@ -46,5 +50,8 @@ router.delete('/:orderId', (req, res, next) => {
   const id = req.params.orderId;
   Order.findById(id)
     .then(foundOrder => { return foundOrder.destroy() })
+    .then(result => {
+      res.send({ message: 'Deleted successfully' })
+    })
     .catch(next);
 });
