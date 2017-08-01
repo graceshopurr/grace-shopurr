@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {withRouter, Link} from 'react-router-dom';
 import {logout} from '../store';
 import Sidebar from './Sidebar';
-import NavBarCart from './NavBarCart'
+import NavBarCart from './NavBarCart';
 
 
 /**
@@ -36,7 +36,7 @@ const Main = (props) => {
                     <Link to="/signup">Sign Up</Link>
                   </div>
               }
-                <NavBarCart />
+                <NavBarCart /> 
             </nav>
 
             <hr />
