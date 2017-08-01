@@ -1,5 +1,6 @@
 import axios from 'axios'
 import history from '../history'
+import Promise from 'bluebird';
 
 //action types
 
@@ -24,7 +25,10 @@ const  initialState = {
 	addedProductIds: [], //which products are in the order at all
 	quantityById: {}, //how many of each product are in the order
 	addedCatIds: [],  //which cats are in the order (only one of each cat no need for quantity)
-	status: "cart" //all open carts start as 'cart' status
+	status: "cart", //all open carts start as 'cart' status
+	dataCats: [],
+	dataProducts: [],
+	orders: []
 }
 
 //action creators 
@@ -40,7 +44,7 @@ const cancelOrder = () => ({type: CANCEL_ORDER})
 
 //other possibly unnecessary action creators
 
-const gotCartProduct = (products) => ({type: FETCH_CART_PRODUCT, products});
+const gotCartProduct = (things) => ({type: FETCH_CART_PRODUCT, things});
 const gotCartCat = (cats) => ({type: FETCH_CART_CAT, cats});
 const gotOrders = (orders) => ({type: FETCH_ORDERS, orders});
 
@@ -135,7 +139,7 @@ export function decrementCat(catId){
 export const fetchCartProduct = () => 
 	dispatch => {
 		const thisCart = unstringifyCart();
-		const productArr = thisCart.addedProductIds;
+		const productArr = thisCart.addedProductIds || [];
 		//do something about the quantities set them on state somehow?
 		Promise.map(productArr, elem => { //get products from DB based on ID
 			return axios.get(`/api/products/${elem}`)
@@ -155,10 +159,10 @@ export const fetchCartProduct = () =>
 export const fetchCartCat = () => 
 	dispatch => {
 		const thisCart = unstringifyCart();
-		const catArr = thisCart.addedCatIds; 
+		const catArr = thisCart.addedCatIds || []; 
 
 		Promise.map(catArr, elem => { //get cats from DB based on ID
-			return axios.get(`/api/cats/${cat}`)
+			return axios.get(`/api/cats/${elem}`)
 		})
 			.then( cats => { //create dataFul cats!
 				return cats.map(cat => cat.data);
@@ -172,7 +176,7 @@ export const fetchCartCat = () =>
 
 	}
 
-	export const fetchOrder = () =>
+	export const fetchOrder = (userId) =>
 		dispatch => {
 			axios.get(`/api/users/${userId}`)
 				.then(orders => orders.filter( elem => elem.status === 'cart'))
@@ -198,6 +202,12 @@ export default function (state = initialState, action){
 			return Object.assign({}, state, { status: 'processing'})
 		case CANCEL_ORDER:
 			return Object.assign({}, state, {status: 'canceled'})
+		case FETCH_CART_CAT:
+			return Object.assign({}, state, {dataCats : action.cats});
+		case FETCH_CART_PRODUCT:
+			return Object.assign({}, state, {dataProducts: action.things});
+		case FETCH_ORDERS:
+			return Object.assign({}, state, {orders: action.orders});
 		default:
 			return state
 	}
