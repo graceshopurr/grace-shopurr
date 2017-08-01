@@ -9,7 +9,7 @@ class AllCats extends Component  {
 	}
 
 	render(){
-		 const cats = this.props.cat.cats;
+		 const cats = this.props.cat.catList;
 		 console.log('props here', this.props);
 		return (
 			<div>

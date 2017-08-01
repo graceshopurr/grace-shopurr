@@ -9,7 +9,7 @@ class AllProducts extends Component {
   }
 
   render() {
-    const products = this.props.product;
+    const products = this.props.product.productList;
 
     return (
       <div>
@@ -23,6 +23,7 @@ class AllProducts extends Component {
               products.map(product => (
                 <div className="col-xs-4" key={product.id}>
                   <Link to={`/products/${product.id}`}>
+                  <img src={ product.imageURL } />
                     <div className="caption">
                       <h5>
                         <span>{product.name}</span>

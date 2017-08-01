@@ -5,54 +5,39 @@ import history from '../history';
 /**
  * ACTION TYPES
  */
-const GET_PRODUCTS = 'GET_PRODUCTS';
-const GET_PRODUCT_BY_ID = 'GET_PRODUCT_BY_ID';
-const ADD_PRODUCT = 'ADD_PRODUCT';
-const UPDATE_PRODUCT = 'UPDATE_PRODUCT';
-const REMOVE_PRODUCT = 'REMOVE_PRODUCT';
+const GET_PRODUCT_LIST = 'GET_PRODUCT_LIST';
+const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT';
 
 /**
  * INITIAL STATE
  */
 const intialState = {
-    products: [],
-    product: {}
+    productList: [],
+    singleProduct: {}
 };
 
 /**
  * ACTION CREATORS
  */
-const getProducts = (products) => ({type: GET_PRODUCTS, products});
-const getProductById = (productId) => ({type: GET_PRODUCT_BY_ID, productId});
-const addProduct = (product) => ({type: ADD_PRODUCT, product});
-const updateProduct = (product) => ({type: UPDATE_PRODUCT, product});
-const removeProduct = (productId) => ({type: REMOVE_PRODUCT, productId});
+const getProductList = (productList) => ({type: GET_PRODUCT_LIST, productList});
+const getSingleProduct = (singleProduct) => ({type: GET_SINGLE_PRODUCT, singleProduct});
 
 /**
  * THUNK CREATORS
  */
 
-export function fetchProducts () {
+export function fetchProductList () {
     return function thunk (dispatch){
-        //sends axios request to get all Products
         return axios.get('/api/products')
-        .then(res => res.data)
-        .then(products => {
-            const action = getProducts(products);
-            dispatch(action);
-        })
-        .catch(error => { console.log('this', error) });
+        .then(res => dispatch(getProductList(res.data)))
+        .catch(error => { console.log(error) });
     };
 }
 
-export function fetchProductsById (productId) {
+export function fetchSingleProduct (productId) {
     return function thunk (dispatch){
         return axios.get(`/api/products/${productId}`)
-        .then(res => res.data)
-        .then(item => {
-            const action = getProductById(item);
-            dispatch(action);
-        })
+        .then(res => dispatch(getSingleProduct(res.data)))
         .catch(error => { console.log(error) });
     };
 }
@@ -61,11 +46,7 @@ export function fetchProductsById (productId) {
 export function createProduct ( product ) {
     return function thunk (dispatch){
         return axios.post('/api/products', {product})
-        .then(res => res.data)
-        .then(addedItem => {
-            const action = addProduct(addedItem);
-            dispatch(action);
-        })
+        .then(res => dispatch(getSingleProduct(res.data)))
         .catch(error => { console.log( error) });
     };
 }
@@ -73,11 +54,7 @@ export function createProduct ( product ) {
 export function changeProduct (productId, product) {
     return function thunk (dispatch){
         return axios.put(`/api/products/${productId}`, {product})
-        .then(res => res.data)
-        .then(changedItem => {
-            const action = updateProduct(changedItem);
-            dispatch(action);
-        })
+        .then(res => dispatch(getSingleProduct(res.data)))
         .catch(error => { console.log( error) });
     };
 }
@@ -85,12 +62,6 @@ export function changeProduct (productId, product) {
 export function deleteProduct(productId){
     return function thunk(dispatch){
         return axios.delete(`/api/products/${productId}`)
-        .then(res => res.data)
-        .then(deletedProduct => {
-            const action = removeProduct(deletedProduct);
-            alert ("You have deleted a Product!");
-            dispatch(action);
-        })
         .catch(error => { console.log(error) });
     };
 }
@@ -102,21 +73,21 @@ export function deleteProduct(productId){
 export default function (state = intialState, action) {
   let newState = Object.assign({}, state);
   switch (action.type) {
-    case GET_PRODUCTS:
-      newState.products = action.products;
+    case GET_PRODUCT_LIST:
+      newState.productList = action.productList;
       break;
-    case GET_PRODUCT_BY_ID:
-      newState.product = action.product;
+    case GET_SINGLE_PRODUCT:
+      newState.singleProduct = action.singleProduct;
       break;
-    case ADD_PRODUCT:
-      newState.products = [action.product, ...state.products];
-      break;
-    case UPDATE_PRODUCT:
-      newState.products = state.products.map(product => ( action.product.id === product.id ? action.product : product));
-      break;
-    case REMOVE_PRODUCT:
-      newState.products = state.products.filter(product => product.id !== action.id);
-      break;
+    // case ADD_PRODUCT:
+    //   newState.products = [action.product, ...state.products];
+    //   break;
+    // case UPDATE_PRODUCT:
+    //   newState.products = state.products.map(product => ( action.product.id === product.id ? action.product : product));
+    //   break;
+    // case REMOVE_PRODUCT:
+    //   newState.products = state.products.filter(product => product.id !== action.id);
+    //   break;
     default:
       return state;
   }
