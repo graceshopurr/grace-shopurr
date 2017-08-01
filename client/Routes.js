@@ -46,7 +46,7 @@ class Routes extends Component {
                 </Switch> : null
             }
             {/* Displays our Login component as a fallback */}
-            <Route component= {Login} />
+            <Route component={Login} />
           </Switch>
         </Main>
       </Router>
