@@ -21,7 +21,7 @@ const Main = (props) => {
       <div className="row-offcanvas row-offcanvas-left">
 
           <div className="col-md-12">
-            <h1>Grace Shopurr</h1>
+            <h1 className="MainTitle">Grace Shopurr</h1>
             <nav>
               {
                 isLoggedIn ?

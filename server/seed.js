@@ -118,7 +118,7 @@ function randReview () {
   return Review.build({
     status: chance.weighted(['pending', 'approved'], [10, 90]),
     review: chance.paragraph(),
-    rating: chance.weighted(['friendly', 'neutral', 'a little prickly'], [40, 40, 20])
+    rating: chance.weighted([1, 2, 3], [40, 40, 20])
   });
 }
 
