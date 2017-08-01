@@ -8,6 +8,7 @@ export default class AllCats extends Component  {
 		super();
 		this.state = store.getState();
 	}
+	
 	render(){
 		const cats = this.state.cat.cats;
 		return (
@@ -23,7 +24,7 @@ export default class AllCats extends Component  {
 		                  <h5>
 		                    <span>{ cat.name }</span>
 		                  </h5>
-		              	 {cat.status === 'adopted'? <span className="label label-primary">{cat.status}</span> : <span className="label label-success">{cat.status}</span>}
+		              	 {cat.status === 'adopted' ? <span className="label label-primary">{cat.status}</span> : <span className="label label-success">{cat.status}</span>}
 		                </div>
 		              </Link>
 		            </div>
