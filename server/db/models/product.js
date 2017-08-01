@@ -1,30 +1,30 @@
-const Sequelize = require('sequelize')
+const {STRING, TEXT, INTEGER} = require('sequelize')
 const db = require('../db')
 
 const Product = db.define('product', {
     name: {
-      type: Sequelize.STRING,
+      type: STRING,
       unique: true,
       allowNull: false
     },
     description: {
-      type: Sequelize.TEXT
+      type: TEXT
     },
     price: {
-      type: Sequelize.INTEGER, //price in cents,
+      type: INTEGER, //price in cents,
       defaultValue: 0,
       validate: {
         min: 0
       }
     },
     inventory: {
-      type: Sequelize.INTEGER,
+      type: INTEGER,
       validate: {
         min: 0
       }
     },
     imageURL : {
-      type: Sequelize.STRING,
+      type: STRING,
       defaultValue: '/assets/images/package.png'
     }
   },

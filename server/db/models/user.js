@@ -28,7 +28,7 @@ const User = db.define('user', {
     type:Sequelize.STRING
   },
   orderHistory:{
-    type:Sequelize.ARRAY(Sequelize.STRING)
+    type:Sequelize.ARRAY(Sequelize.STRING) // SH: not needed, maybe take out?
   },
   firstName: {
     type: Sequelize.STRING

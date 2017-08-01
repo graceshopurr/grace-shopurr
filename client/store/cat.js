@@ -6,9 +6,9 @@ import history from '../history';
  */
 const GET_CATS = 'GET_CATS';
 const GET_CAT_BY_ID = 'GET_CAT_BY_ID';
-const ADD_CAT = 'ADD_CAT';
-const UPDATE_CAT = 'UPDATE_CAT';
-const REMOVE_CAT = 'REMOVE_CAT';
+// const ADD_CAT = 'ADD_CAT';
+// const UPDATE_CAT = 'UPDATE_CAT';
+// const REMOVE_CAT = 'REMOVE_CAT';
 
 
 /**
@@ -16,7 +16,7 @@ const REMOVE_CAT = 'REMOVE_CAT';
  */
 const intialState = {
     cats: [],
-    cat: {}
+    selectedCat: {}
 };
 
 /**
@@ -24,9 +24,9 @@ const intialState = {
  */
 const getCats = (cats) => ({type: GET_CATS, cats});
 const getCatById = (cat) => ({type: GET_CAT_BY_ID, cat});
-const addCat = (cat) => ({type: ADD_CAT, cat});
-const updateCat = (cat) => ({type: UPDATE_CAT, cat});
-const removeCat = (catId) => ({type: REMOVE_CAT, catId});
+// const addCat = (cat) => ({type: ADD_CAT, cat});
+// const updateCat = (cat) => ({type: UPDATE_CAT, cat});
+// const removeCat = (catId) => ({type: REMOVE_CAT, catId});
 
 /**
  * THUNK CREATORS
@@ -61,10 +61,11 @@ export function fetchCatsById (catId) {
 export function createCat (cat ) {
     return function thunk (dispatch){
         return axios.post('/api/cats', {cat})
-        .then(res => res.data)
-        .then(addedCat => {
-            const action = addCat(addedCat);
-            dispatch(action);
+        // .then(res => res.data)
+        .then(() => {
+            // const action = addCat(addedCat);
+            // dispatch(action);
+            dispatch(fetchCats())
         })
         .catch(error => { console.log(error) });
     };
@@ -108,14 +109,14 @@ export default function (state = intialState, action) {
     case GET_CAT_BY_ID:
       newState.cat = action.cat;
       break;
-    case ADD_CAT:
-      newState.cats = [action.cat, ...state.cats];
-      break;
-    case UPDATE_CAT:
-      newState.cats = state.cats.map(cat => (action.cat.id === cat.id ? action.cat : cat));
-      break;
-    case REMOVE_CAT:
-      newState.cats = state.cats.filter(cat => cat.id !== action.id);
+    // case ADD_CAT:
+    //   newState.cats = [action.cat, ...state.cats];
+    //   break;
+    // case UPDATE_CAT:
+    //   newState.cats = state.cats.map(cat => (action.cat.id === cat.id ? action.cat : cat));
+    //   break;
+    // case REMOVE_CAT:
+    //   newState.cats = state.cats.filter(cat => cat.id !== action.id);
       break;
     default:
       return state;

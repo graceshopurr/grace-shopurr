@@ -108,15 +108,15 @@ export default function (state = intialState, action) {
     case GET_PRODUCT_BY_ID:
       newState.product = action.product;
       break;
-    case ADD_PRODUCT:
-      newState.products = [action.product, ...state.products];
-      break;
-    case UPDATE_PRODUCT:
-      newState.products = state.products.map(product => ( action.product.id === product.id ? action.product : product));
-      break;
-    case REMOVE_PRODUCT:
-      newState.products = state.products.filter(product => product.id !== action.id);
-      break;
+    // case ADD_PRODUCT:
+    //   newState.products = [action.product, ...state.products];
+    //   break;
+    // case UPDATE_PRODUCT:
+    //   newState.products = state.products.map(product => ( action.product.id === product.id ? action.product : product));
+    //   break;
+    // case REMOVE_PRODUCT:
+    //   newState.products = state.products.filter(product => product.id !== action.id);
+    //   break;
     default:
       return state;
   }
