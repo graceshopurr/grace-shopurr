@@ -32,7 +32,7 @@ export default class Sidebar extends React.Component {
               onChange={this.handleChange}
               type="text" name="Search"
               value = {this.state.inputValue} />
-              <Link to={`search/${this.state.inputValue}`}>
+              <Link to={`/search/${this.state.inputValue}`}>
               <button className="btn btn-primary" type="button">Go</button>
               </Link>
             </form>
