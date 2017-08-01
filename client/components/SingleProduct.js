@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {withRouter, Link} from 'react-router-dom'
+import {withRouter, Link} from 'react-router-dom';
+import { fetchSingleProduct } from '../store';
 
 
 class SingleProduct extends Component {
@@ -15,6 +16,10 @@ class SingleProduct extends Component {
 		this.handleSubmit = this.handleSubmit.bind(this);
 	}
 
+	componentDidMount() {
+		let productId = this.props.match.params.productId;
+		this.props.loadData(productId);
+	}
 
 //add inventory checks from store when we've worked out INVENTORY!
 	plus(){
@@ -36,8 +41,9 @@ class SingleProduct extends Component {
 	}
 
 	render(){
-		const productId = this.props.match.params.productId;
-		const product = this.props.product.filter( p => Number(p.id) === Number(productId))[0];
+		// const productId = this.props.match.params.productId;
+		// const product = this.props.product.productList.filter( p => Number(p.id) === Number(productId))[0];
+		const product = this.props.product.singleProduct;
 
 		return (product) ? (
 			<div>
@@ -58,7 +64,13 @@ const mapState = (state) => ({
   product: state.product
 });
 
-const mapDispatch = null;
+const mapDispatch = (dispatch) => {
+	return {
+		loadData(productId) {
+			dispatch(fetchSingleProduct(productId));
+		}
+	};
+};
 
 export default connect(mapState, mapDispatch)(SingleProduct);
 
