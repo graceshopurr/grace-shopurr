@@ -10,6 +10,7 @@ import SingleCat from './components/SingleCat';
 import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
 import { store, me, fetchCatList, fetchProductList } from './store';
+import Cart from './components/Cart';
 import Main from './components/Main';
 import SearchResults from './components/SearchResults';
 
@@ -39,6 +40,7 @@ class Routes extends Component {
             <Route path="/products/:productId" component={SingleProduct} />
             <Route path ="/cats/:catId" component={SingleCat} />
             <Route exact path ="/cats" component={AllCats} />
+            <Route exact path = "/cart" component={Cart} />
             <Route path ="/search/:query" component={SearchResults} />
             {
               isLoggedIn ?
