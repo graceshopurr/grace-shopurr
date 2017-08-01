@@ -27,7 +27,7 @@ class AllProducts extends Component {
                       <h5>
                         <span>{product.name}</span>
                       </h5>
-                      <p>{product.description}</p>
+                      <span>${product.dollarPrice}</span>
                     </div>
                   </Link>
                 </div>
