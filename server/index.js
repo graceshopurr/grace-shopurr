@@ -57,15 +57,19 @@ const createApp = () => {
   function checkAuthentication(req,res,next){
     if (req.isAuthenticated()){
       let newCart = JSON.parse(localStorage.cart);
-      newCart.userId = req.user.id //where do i get user id? is this right? 
-      //do i need to restringify the cart?
-      Cart.create(newCart)
-        .then(cart => res.status(201).json(cart))
-     
-    }
-     next();
-  }
+      let date = Date.now();
+      let status = 'cart';
+      newCart.userId = req.user.id 
 
+//instead of running creates here, in an ideal world, we'd check for a populated localStorage carts, then sending it to a route
+      newCart.addedCatIds.forEach( catId => Order.create({ catId, userId, date, status}))
+      newCart.addedProductIds.forEach( productId => Order.create({ productId: productId, quantity: newCart.quantityById[productId], date : date, status : status, userId: userId}))
+      let JSONCart = JSON.stringify(newCart);
+      localStorage.setItem(JSONCart);
+      console.log()
+  }
+  next();
+}
   app.use(checkAuthentication)
 
 

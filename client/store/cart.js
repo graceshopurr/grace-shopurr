@@ -16,6 +16,7 @@ const CANCEL_ORDER = 'CANCEL_ORDER';
 
 const FETCH_CART_PRODUCT = 'FETCH_CART_PRODUCT';
 const FETCH_CART_CAT = 'FETCH_CART_CAT';
+const FETCH_ORDERS = 'FETCH_ORDERS';
 
 //initial state
 
@@ -41,6 +42,7 @@ const cancelOrder = () => ({type: CANCEL_ORDER})
 
 const gotCartProduct = (products) => ({type: FETCH_CART_PRODUCT, products});
 const gotCartCat = (cats) => ({type: FETCH_CART_CAT, cats});
+const gotOrders = (orders) => ({type: FETCH_ORDERS, orders});
 
 
 //start cart function sets a cart on local storage find or create
@@ -142,7 +144,7 @@ export const fetchCartProduct = () =>
 				return products.map(product => product.data);
 			})
 			.then(products => {//make products into dataful array of objects, WITH QUANTITIES 
-				return products.map => (product => ({quantity: thisCart.quantityById[product.id], product}))
+				return products.map(product => ({quantity: thisCart.quantityById[product.id], product}))
 			})
 			.then( productCart => {
 				dispatch(gotCartProduct(productCart));
@@ -169,6 +171,13 @@ export const fetchCartCat = () =>
 			})
 
 	}
+
+	export const fetchOrder = () =>
+		dispatch => {
+			axios.get(`/api/users/${userId}`)
+				.then(orders => orders.filter( elem => elem.status === 'cart'))
+				.then(orderCollection => dispatch(gotOrders(orderCollection)));
+		} 
 //reducer
 
 export default function (state = initialState, action){
