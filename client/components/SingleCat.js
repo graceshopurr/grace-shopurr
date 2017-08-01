@@ -1,6 +1,7 @@
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
 import { fetchSingleCat } from '../store';
+import Reviews from './Reviews';
 
 class SingleCat extends Component{
 
@@ -23,10 +24,10 @@ class SingleCat extends Component{
 				<br />
 				<span>
 					Status: <span className="label label-default">{cat.status} </span>
-				</span>
+				</span> <br />
 				<span>
 					Age: <span className="label label-default"> {cat.age} </span>
-				</span>
+				</span> <br />
 				<span>
 					Gender: <span className="label label-default"> {cat.gender} </span>
 				</span>
@@ -36,6 +37,8 @@ class SingleCat extends Component{
 				<span>{ cat.description }</span>
 				<br />
 				{(cat.status === 'available') ? <button type="button" className="btn btn-warning">Adopt Me!</button>:null}
+				<hr />
+				<Reviews catId={this.props.match.params.catId} />
 			</div>
 			) : (<div />);
 
