@@ -17,7 +17,7 @@ class AllProducts extends Component {
         <h3>Support Our Kitties!!!</h3>
 
         <p>
-          Want to show love for our cats, even if you can't bring one of them home with you? You can show your support by buying much-needed supplies for our shelter.  This way, you know exactly how your donations are helping our Kitties.
+          Want to show love for our cats, even if you can’t bring one of them home with you? You can show your support by buying much-needed supplies for our shelter. This way, you know exactly how your donations are helping our Kitties.
         </p>
 
         <div className="row">
