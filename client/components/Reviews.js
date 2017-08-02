@@ -1,47 +1,50 @@
 import React, {Component} from 'react';
 import { connect } from 'react-redux';
-import { fetchReviewList } from '../store';
+import axios from 'axios';
 
 class Reviews extends Component{
 
   constructor(props){
     super(props);
+    this.state = {
+      user: {}
+    };
   }
 
-  componentDidMount() {
-    let catId = this.props.catId;
-    console.log('cat id', this.props.catId);
-    this.props.loadData(catId);
+  componentDidMount () {
+    const userId = this.props.singleReview.userId;
+    this.fetchUserbyId(userId);
+  }
+
+  fetchUserbyId(id) {
+    axios.get(`/api/users/${id}`)
+    .then(res => this.setState({user: res.data}))
+    .catch(error => {console.log(error)});
   }
 
   render(){
-    const reviews = this.props.review.reviewList;
+    const review = this.props.singleReview;
     return (
-       <div>
-        <h3>Reviews </h3>
-        {reviews.map( review => (
           <div>
           <hr />
-          <p> Friendliness rating: {review.friendlinessRating} </p>
+          <p> <b>{this.state.user.firstName}</b>
+          &nbsp; &nbsp; Friendliness rating: {ratingConverter(review.friendlinessRating)} </p>
           <p> {review.reviewText} </p>
         </div>
-          ))}
-      </div>
       ) ;
-
   }
 }
 
+function ratingConverter(num){
+  if (num === 1) return 'a little prickly';
+  else if (num === 3) return 'friendly';
+  else return 'neutral';
+
+}
+
 const mapState = (state) => ({
-  review: state.review
 });
 
-const mapDispatch = (dispatch) => {
-  return {
-    loadData(catId) {
-      dispatch(fetchReviewList(catId));
-    }
-  };
-};
+const mapDispatch = null;
 
 export default connect(mapState, mapDispatch)(Reviews);

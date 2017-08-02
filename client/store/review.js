@@ -17,11 +17,20 @@ export function fetchReviewList (catId){
     return axios.get('/api/reviews')
     .then(res => {
       let reviews = res.data;
-      reviews.filter(review => review.catId === catId);
+      reviews = reviews.filter(review => Number(review.catId) === Number(catId));
       dispatch(getReviewList(reviews));
     })
     .catch(error => {console.log(error)});
   };
+}
+
+export function writeReview(review){
+  console.log('write review thunk', review);
+  return function thunk (dispatch) {
+    return axios.post('/api/reviews', review)
+//how to reload page?
+    .catch(error => {console.log(error)});
+  }
 }
 
 //Reducer

@@ -50,26 +50,26 @@ const createApp = () => {
   app.use(passport.initialize())
   app.use(passport.session())
 
-  // convert local storage cart to DB cart HERE!!! 
-  //helper function for middleware goals:  if user is logged in a) check localStorage for cart, 
+  // convert local storage cart to DB cart HERE!!!
+  //helper function for middleware goals:  if user is logged in a) check localStorage for cart,
 //  then b) check DB for "open cart", DO I HAVE TO COMBINE THE CARTS or can i just pick one?
 
-  function checkAuthentication(req,res,next){
-    if (req.isAuthenticated()){
-      let newCart = JSON.parse(localStorage.cart);
-      let date = Date.now();
-      let status = 'cart';
-      newCart.userId = req.user.id 
-//instead of running creates here, in an ideal world, we'd check for a populated localStorage carts, then sending it to a route
-      newCart.addedCatIds.forEach( catId => Order.create({ catId, userId, date, status}))
-      newCart.addedProductIds.forEach( productId => Order.create({ productId: productId, quantity: newCart.quantityById[productId], date : date, status : status, userId: userId}))
-      let JSONCart = JSON.stringify(newCart);
-      localStorage.setItem(JSONCart);
-      console.log()
-  }
-  next();
-}
-  app.use(checkAuthentication)
+//   function checkAuthentication(req,res,next){
+//     if (req.isAuthenticated()){
+//       let newCart = JSON.parse(localStorage.cart);
+//       let date = Date.now();
+//       let status = 'cart';
+//       newCart.userId = req.user.id
+// //instead of running creates here, in an ideal world, we'd check for a populated localStorage carts, then sending it to a route
+//       newCart.addedCatIds.forEach( catId => Order.create({ catId, userId, date, status}))
+//       newCart.addedProductIds.forEach( productId => Order.create({ productId: productId, quantity: newCart.quantityById[productId], date : date, status : status, userId: userId}))
+//       let JSONCart = JSON.stringify(newCart);
+//       localStorage.setItem(JSONCart);
+//       console.log()
+//   }
+//   next();
+// }
+//   app.use(checkAuthentication)
 
 
 
