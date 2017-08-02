@@ -51,14 +51,14 @@ const gotOrders = (orders) => ({type: FETCH_ORDERS, orders});
 
 //start cart function sets a cart on local storage find or create
 export function makeCartOnLocalStorage(){
-	if(!localStorage.cart){
+	if (!localStorage.cart){
 		let localCart = initialState;
 		localCart = stringifyCart(localCart)
 		
 		localStorage.setItem('cart', localCart);
 		console.log("your new cart: " ,localStorage.cart);
 	
-	}else{
+	} else {
 		console.log("Your cart contains: ", localStorage.cart);
 	}
 }
@@ -72,23 +72,24 @@ function unstringifyCart(){
 	  return "There is no cart";
 	}
 }
+
 function stringifyCart(cart){
 	return JSON.stringify(cart);
 }
 
 export function clearCart(){
-	if(localStorage.cart){
+	if (localStorage.cart){
 		localStorage.removeItem('cart');
-	}else{
+	} else{
 		console.log("there is no cart to clear");
 	}
 }
 
 export function incrementProduct(productId){
-	cartObj = unstringifyCart();
+	var cartObj = unstringifyCart();
 	if (cartObj.addedProductIds.includes(productId)){
 		cartObj.quantityById[productId]++
-	}else{
+	} else {
 		cartObj.addedProductIds.push(productId);
 		cartObj.quantityById[productId] = 1;
 	}
@@ -98,56 +99,50 @@ export function incrementProduct(productId){
 }
 
 export function decrementProduct(productId){
-	cartObj = unstringifyCart();
+	var cartObj = unstringifyCart();
 	if (cartObj.quantityById[productId] > 0){
-		cartObj.quantityById[productId] --
-		if (cartObj.quantityById[productId] == 0){
-			cartObj.addedProductIds = cartObj.addedProductIds.filter( elem => elem != productId);
+		cartObj.quantityById[productId]--
+		if (cartObj.quantityById[productId] === 0){
+			cartObj.addedProductIds = cartObj.addedProductIds.filter( elem => elem !== productId);
 		}
-	}else{
+	} else {
 		console.log('You cannot remove products that are not in your cart');
 	}
 
 
 	cartObj = stringifyCart(cartObj);
 	localStorage.setItem('cart', cartObj);
-	// console.log(localStorage.cart);
+	console.log(localStorage.cart);
 }
 
 export function incrementCat(catId){
-	cartObj = unstringifyCart();
+	var cartObj = unstringifyCart();
 
 	cartObj.addedCatIds.push(catId);
 
 	cartObj = stringifyCart(cartObj);
 	localStorage.setItem('cart', cartObj);
-	// console.log(localStorage.cart);
+	console.log(localStorage.cart);
 }
 
 export function decrementCat(catId){
-	cartObj = unstringifyCart();
+	var cartObj = unstringifyCart();
 
-	cartObj.addedCatIds = cartObj.addedCatIds.filter( elem => elem != catId);
+	cartObj.addedCatIds = cartObj.addedCatIds.filter( elem => elem !== catId);
 
 	cartObj = stringifyCart(cartObj);
 	localStorage.setItem('cart', cartObj);
-	// console.log(localStorage.cart);
+	console.log(localStorage.cart);
 }
 
 //thunk creator for adding to cart = 
 
-// export const putCatOnCart = (catId) =>
-// 	dispatch => {
-// 		function incrementCat(catId){
-// 		cartObj = unstringifyCart();
-
-// 		cartObj.addedCatIds.push(catId);
-
-// 		cartObj = stringifyCart(cartObj);
-// 		localStorage.setItem('cart', cartObj);
-// 		console.log(localStorage.cart);
-// 	}
-// 	dispatch(addCatToCart(catId));
+// export function createCartOnLS (catId) {
+//     return function thunk (dispatch){
+//         makeCartOnLocalStorage();
+//           dispatch(addCatToCart(catId))
+//         }
+   
 // }
 
 //thunk creator: fetch cart  

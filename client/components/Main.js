@@ -14,7 +14,7 @@ import NavBarCart from './NavBarCart';
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-  console.log(props);
+  // console.log(props);
   const {children, handleClick, isLoggedIn} = props;
   return (
      <div id = "main" className="container-fluid">

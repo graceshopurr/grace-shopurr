@@ -9,12 +9,12 @@ import { fetchCartProduct,fetchCartCat, fetchOrders } from '../store/cart';
 class Cart extends Component{
 	constructor(props){
 		super(props);
-
 	}
+
 	componentDidMount(){
 
 		const helper = (userId = null) => {
-			if(userId){
+			if (userId){
 				this.props.fetchOrders(userId);
 			}
 			this.props.fetchCartProduct();
@@ -28,10 +28,9 @@ class Cart extends Component{
 			let theCart = JSON.parse(localStorage.cart); 
 			let userId = theCart.userId; 	
 			helper(userId);
-		}else{
+		} else {
 			helper();
 		}
-		
 	}
 
 	// function organizeData(){}
@@ -50,6 +49,9 @@ class Cart extends Component{
 		}
 	}
 
+	console.log(this.props.cart.dataProducts)
+	//use a for in loop for the object 
+	
 	// console.log('THE PROPS ',this.props.cart);
 	// condition rendering on whether items are in the cart or not 
 	const cartItems = hasItemsInCart ?
@@ -59,7 +61,7 @@ class Cart extends Component{
 	<h4>HI I AM A CART I HAVE THINGS IN ME</h4>
 		<h4> Cats You Want To Adopt </h4>
 		{ this.props.cart.dataCats.map((cat) => {
-			// console.log('cat name', cat[3])
+			console.log('cat name', cat)
 			return (
 			<div key={Math.random()}>
 				<div>
@@ -71,7 +73,6 @@ class Cart extends Component{
 				)
 		})}
 	</div>
-		
 	) : (
 		<h4> There are currently no items in your cart! </h4>
 	)

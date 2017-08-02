@@ -19,3 +19,4 @@ export * from './user';
 export * from './cat';
 export * from './product';
 export * from './review';
+export * from './cart';

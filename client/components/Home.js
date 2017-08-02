@@ -5,7 +5,7 @@ import {connect} from 'react-redux';
 
 const Home = (props) => {
 
-  console.log('j');
+  // console.log('j');
   return (
     <div>
       <h3>Welcome to Grace Shopurr!</h3>
