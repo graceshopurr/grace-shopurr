@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import {withRouter, Link} from 'react-router-dom';
 import {logout} from '../store';
 import Sidebar from './Sidebar';
+import NavBarCart from './NavBarCart';
 
 
 /**
@@ -19,7 +20,6 @@ const Main = (props) => {
      <div id = "main" className="container-fluid">
       <div className="container">
       <div className="row-offcanvas row-offcanvas-left">
-
           <div className="col-md-12">
             <h1 className="MainTitle">Grace Shopurr</h1>
             <nav>
@@ -36,6 +36,7 @@ const Main = (props) => {
                     <Link to="/signup">Sign Up</Link>
                   </div>
               }
+                <NavBarCart /> 
             </nav>
 
             <hr />
