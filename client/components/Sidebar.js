@@ -36,6 +36,11 @@ export default class Sidebar extends React.Component {
               <button className="btn btn-primary" type="button">Go</button>
               </Link>
             </form>
+
+            <hr />
+            Grace Shopurr Project:
+            <Link to="/github"> Github </Link>
+
           </div>
       </div>
     );
