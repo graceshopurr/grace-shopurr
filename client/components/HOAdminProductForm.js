@@ -20,16 +20,20 @@ function HOAdminProductForm(Component, thunkCreator) {
     }
 
     componentDidMount() {
+      // console.log('this.props: ', this.props);
+      // console.log('this.props.match.params.productId:', this.props.match.params.productId);
       if(this.props.match.params.productId) {
-        this.productId = this.props.match.params.productId;
-        store.dispatch(fetchSingleProduct(this.productId));
+        this.state.productId = this.props.match.params.productId;
+        // console.log('Component did mount. this.state:', this.state);
       }
+      store.dispatch(fetchSingleProduct(this.state.productId));
     }
 
     componentWillReceiveProps(nextProps) {
-      if(nextProps.product !== this.props.product) {
+      // console.log('nextProps: ', nextProps);
+      if(nextProps.singleProduct !== this.props.singleProduct) {
         this.setState({
-          formProduct: nextProps.product
+          formProduct: nextProps.singleProduct
         })
       }
     }
@@ -56,16 +60,17 @@ const mapAddProduct = (state) => {
   return {
     name: 'createProduct',
     displayName: 'Add product',
-    error: state.product.error
+    error: state.product.singleProduct.error
   };
 };
 
 const mapEditProduct = (state) => {
+  // console.log('state:', state)
   return {
     name: 'changeProduct',
     displayName: 'Edit product',
-    error: state.product.error,
-    product: state.product.product || {}
+    error: state.product.singleProduct.error,
+    singleProduct: state.product.singleProduct || {}
   };
 };
 

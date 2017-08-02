@@ -12,7 +12,6 @@ const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT';
  */
 const intialState = {
     products: [],
-    product: {}, // used by AdminProductForm & HOAdminProduct Form, and should probably be refactored to use singleProduct instead
     productList: [],
     singleProduct: {}
 };
@@ -46,7 +45,7 @@ export function fetchSingleProduct (productId) {
 
 export function createProduct ( product ) {
     return function thunk (dispatch){
-        return axios.post('/api/products', {product})
+        return axios.post('/api/products', product)
         .then(res => dispatch(getSingleProduct(res.data)))
         .catch(error => { console.log( error) });
     };
@@ -54,7 +53,7 @@ export function createProduct ( product ) {
 
 export function changeProduct (productId, product) {
     return function thunk (dispatch){
-        return axios.put(`/api/products/${productId}`, {product})
+        return axios.put(`/api/products/${productId}`, product)
         .then(res => dispatch(getSingleProduct(res.data)))
         .catch(error => { console.log( error) });
     };
