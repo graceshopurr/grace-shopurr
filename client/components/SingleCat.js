@@ -41,39 +41,39 @@ class SingleCat extends Component{
 		 const {isLoggedIn} = this.props;
 		//   const addedCatIds = this.props.cart.addedCatIds;
 
-		  
+
 		 let newCart = true;
 		  if (localStorage.cart){
 			  newCart = false
 		  }
 
 			return (cat && reviews) ? (
-			 <div className = "single-cat">
-		   <div className="single-flex">
-		   	<div className="single-cat-1">
-					<h3>{ cat.name }</h3>
+			 <div className = "single-cat col-lg-9 offset-lg-3">
+				<h3>{ cat.name }</h3>
+		   <div className="row">
+		   	<div className="single-cat-1 col-lg-2">
 					<img src={ cat.imageURL } className="img-thumbnail" />
 				</div>
-				<div className="single-cat-2">
-				<span>
-					Status: <span className="label label-default">{cat.status} </span>
-				</span> <br />
-				<span>
-					Age: <span className="label label-default"> {cat.age} </span>
-				</span> <br />
-				<span>
-					Gender: <span className="label label-default"> {cat.gender} </span>
-				</span>
-				<br />
-				<b>Who am I?</b>
-				<br />
-				<span>{ cat.description }</span>
-				<br />
-				{(cat.status === 'available') ? <button type="button" onClick={newCart ? this.createNewCart : this.addCatToCart } className="btn btn-primary">Adopt Me!</button>:null}
-					</div>
+				<div className="single-cat-1 col-lg-10">
+					<span>
+						Status: <span className="label label-default">{cat.status} </span>
+					</span> <br />
+					<span>
+						Age: <span className="label label-default"> {cat.age} </span>
+					</span> <br />
+					<span>
+						Gender: <span className="label label-default"> {cat.gender} </span>
+					</span>
+					<br />
+					<b>Who am I?</b>
+					<br />
+					<span>{ cat.description }</span>
+					<br />
+					{(cat.status === 'available') ? <button type="button" onClick={newCart ? this.createNewCart : this.addCatToCart } className="btn btn-primary">Adopt Me!</button>:null}
 				</div>
-				<hr />
-				<h3> Reviews </h3>
+			</div>
+			<hr />
+			<h3> Reviews </h3>
 			 { isLoggedIn ? <div>
 				<p> Have you interacted with this cat? <button type="button" className="btn btn-primary" onClick={this.toggleReviewForm}>Write Review</button>
 				</p>
@@ -99,7 +99,7 @@ const mapDispatch = (dispatch) => {
 		loadData(catId) {
 			dispatch(fetchSingleCat(catId));
 			dispatch(fetchReviewList(catId));
-		}, 
+		},
 		addCat(catId) {
 			console.log("in add product");
 			dispatch(incrementCat(catId))
