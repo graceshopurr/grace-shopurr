@@ -26,7 +26,7 @@ router.get('/:userId', (req, res, next) => {
     const id = req.params.userId;
     User.findOne({
         where: {id},
-        attributes: ['id', 'email']
+        attributes: ['id', 'email', 'firstName']
       })
     .then(user => res.json(user))
     .catch(next);

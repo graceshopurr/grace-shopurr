@@ -31,10 +31,26 @@ html,
 
 body {
   padding-top: 50px;
+  background-image: url('http://silhouettesfree.com/animals/domestic-animals/cat-silhouette-image-11.png');
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-size:130px 130px;
+  background-position: top right;
+
 }
 
 img {
   width: 200px;
+}
+
+.large-img {
+  width: 400px;
+}
+
+.btn-primary {
+  background-color: #399;
+  border-color: #399;
+  margin-top: 5px;
 }
 
 // ---------------- Main component ----------------
@@ -116,19 +132,26 @@ img {
 
 // ---------------- AllCats component ----------------
 .AllCats {
-    .btn-primary {
-      background-color: #399;
-      border-color: #399;
-      margin-top: 5px;
-    }
 
 }
 
 // ---------------- AllProducts component ----------------
 .AllProducts {
-    .btn-primary {
-      background-color: #399;
-      border-color: #399;
-      margin-top: 5px;
-    }
+
 }
+
+// .single-flex {
+//    display: -webkit-flex;
+//    display: flex;
+//    align-content: space-around;
+//    -webkit-flex-direction: row;
+//    flex-flow: row wrap;
+//    -webkit-justify-content: flex-start;
+//    justify-content: flex-start;
+//   .single-cat-1 {
+
+//    }
+//   .single-cat-2 {
+
+//    }
+// }

@@ -34,12 +34,10 @@ export function fetchCatList () {
 }
 
 export function fetchSingleCat (catId) {
-  console.log('fetch single cat');
     return function thunk (dispatch){
         return axios.get(`/api/cats/${catId}`)
         .then(res => {
-          dispatch(getSingleCat(res.data))
-        //   console.log(res.data);
+          dispatch(getSingleCat(res.data));
         })
         .catch(error => { console.log(error) });
     };
