@@ -15,13 +15,13 @@ class SingleProduct extends Component {
 		this.minus = this.minus.bind(this);
 		this.addProductToCart = this.addProductToCart.bind(this);
 		this.createNewCart = this.createNewCart.bind(this);
-		
+
 	}
 
 	componentDidMount() {
 		let productId = this.props.match.params.productId;
 		this.props.loadData(productId);
-		
+
 	}
 
 //add inventory checks from store when we've worked out INVENTORY!
@@ -65,7 +65,7 @@ class SingleProduct extends Component {
 		  }
 
 		return (product) ? (
-			<div>
+			<div class="SingleProduct col-lg-9 offset-lg-3">
 				<h3> { product.name } </h3>
 				<img src={ product.imageURL } />
 				<br />
