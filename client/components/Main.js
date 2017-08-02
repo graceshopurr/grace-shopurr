@@ -6,7 +6,6 @@ import {logout} from '../store';
 import Sidebar from './Sidebar';
 import NavBarCart from './NavBarCart';
 
-
 /**
  * COMPONENT
  *  The Main component is our 'picture frame' - it displays the navbar and anything

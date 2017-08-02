@@ -16,7 +16,6 @@ class AllCats extends Component {
 		if (event.target.value === 'all') this.setState({filter: ['available', 'adopted', 'all']});
 		else this.setState({filter: [event.target.value]});
 	}
-
 	render(){
 		let cats = this.props.cat.catList;
 		cats = cats.filter(cat => this.state.filter.includes(cat.status));

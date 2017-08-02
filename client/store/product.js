@@ -1,7 +1,6 @@
 import axios from 'axios';
 import history from '../history';
 
-
 /**
  * ACTION TYPES
  */
@@ -12,6 +11,7 @@ const GET_SINGLE_PRODUCT = 'GET_SINGLE_PRODUCT';
  * INITIAL STATE
  */
 const intialState = {
+    products: [],
     productList: [],
     singleProduct: {}
 };
@@ -45,7 +45,7 @@ export function fetchSingleProduct (productId) {
 
 export function createProduct ( product ) {
     return function thunk (dispatch){
-        return axios.post('/api/products', {product})
+        return axios.post('/api/products', product)
         .then(res => dispatch(getSingleProduct(res.data)))
         .catch(error => { console.log( error) });
     };
@@ -53,7 +53,7 @@ export function createProduct ( product ) {
 
 export function changeProduct (productId, product) {
     return function thunk (dispatch){
-        return axios.put(`/api/products/${productId}`, {product})
+        return axios.put(`/api/products/${productId}`, product)
         .then(res => dispatch(getSingleProduct(res.data)))
         .catch(error => { console.log( error) });
     };
@@ -66,11 +66,10 @@ export function deleteProduct(productId){
     };
 }
 
-
 /**
  * REDUCER
  */
-export default function (state = intialState, action) {
+export default function(state = intialState, action) {
   let newState = Object.assign({}, state);
   switch (action.type) {
     case GET_PRODUCT_LIST:

@@ -31,7 +31,7 @@ const  initialState = {
 	orders: []
 }
 
-//action creators 
+//action creators
 
 const addCatToCart = (catId) => ({type: ADD_CAT_TO_CART, catId})
 const removeCatFromCart = (catId) => ({type: REMOVE_CAT_FROM_CART, catId})

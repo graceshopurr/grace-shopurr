@@ -4,7 +4,7 @@ import {Router, Redirect } from 'react-router';
 import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
-import { AllCats, AllProducts, Login, Signup, UserHome, ChangeProduct, CreateProduct, SingleCat, SingleProduct, Main, Home, Cart, SearchResults} from './components';
+import { AllCats, AllProducts, Login, Signup, UserHome, ChangeProduct, CreateProduct, SingleCat, SingleProduct, Main, Home, Cart, SearchResults, EditProduct, AddProduct} from './components';
 import { store, me, fetchCatList, fetchProductList } from './store';
 
 /**
@@ -30,12 +30,12 @@ class Routes extends Component {
             <Route exact path='/github' component={() => window.location = 'https://github.com/graceshopurr/grace-shopurr'}/>
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
-            <Route exact path="/products/add" component={CreateProduct} />
-            <Route path="/products/edit" component={ChangeProduct} />
-            <Route exact path ="/products" component={AllProducts} />
-            <Route path="/products/:productId" component={SingleProduct} />
-            <Route path ="/cats/:catId" component={SingleCat} />
-            <Route exact path ="/cats" component={AllCats} />
+            <Route exact path ="/products" component = {AllProducts} />
+            <Route exact path="/products/add" component={AddProduct} />
+            <Route exact path="/products/:productId" component = {SingleProduct} />
+            <Route path="/products/:productId/edit" component={EditProduct} />
+            <Route exact path ="/cats" component = {AllCats} />
+            <Route path ="/cats/:catId" component = {SingleCat} />
             <Route exact path = "/cart" component={Cart} />
             <Route path ="/search/:query" component={SearchResults} />
             {
