@@ -4,43 +4,33 @@ import React from 'react';
 import {connect} from 'react-redux';
 import PropTypes from 'prop-types';
 
-/* --------- VALUES FOR TESTING ---------- */
-
-// let props = {
-//   displayName: 'Submit',
-//   error: state.user.error,
-//   existingRecord: {},
-//   handleSubmit: function() {}
-// };
-
 /* -------------- COMPONENT -------------- */
 
 const AdminProductForm = (props) => {
-  // console.log('props:',props);
-  const {displayName, error, existingRecord} = props;
+  const {displayName, error, existingRecord, handleChange, handleSubmit, name, formProduct} = props;
 
   return (
     <div className="AdminProductForm col-lg-9 offset-lg-3">
-      <form onSubmit={props.handleSubmit} className="form-horizontal">
+      <form onSubmit={(evt) => handleSubmit(evt, formProduct.id)} className="form-horizontal">
         <div className="form-group row">
           <label className="col-lg-6 col-md-8 col-form-label control-label" htmlFor="productName">* Name</label>
           <div className="col-lg-6 col-md-8">
-            <input id="productName" name="productName" type="text" placeholder="e.g., '40 lb. bag of litter'" className="form-control input-md" required="" onChange={props.handleChange} />
-            <span className="help-block">A product name is required</span>
+            <input id="productName" name="productName" type="text" className="form-control input-md" required="" onChange={handleChange} value={formProduct.name} />
+            <span className="help-block">A product name (e.g., '40 lb. bag of litter') is required</span>
           </div>
         </div>
 
         <div className="form-group row">
           <label className="col-lg-6 col-md-8 col-form-label control-label" htmlFor="productDescription">Description</label>
           <div className="col-lg-6 col-md-8">
-            <textarea className="form-control" id="productDescription" name="productDescription" onChange={props.handleChange}></textarea>
+            <textarea className="form-control" id="productDescription" name="productDescription" onChange={handleChange} value={formProduct.description}></textarea>
           </div>
         </div>
 
         <div className="form-group row">
           <label className="col-lg-6 col-md-8 col-form-label control-label" htmlFor="productPrice">Price</label>
           <div className="col-lg-6 col-md-8">
-            <input id="productPrice" name="productPrice" type="text" placeholder="e.g., '500' for $5; defaults to 0" className="form-control input-md" onChange={props.handleChange} />
+            <input id="productPrice" name="productPrice" type="text" placeholder="e.g., '500' for $5; defaults to 0" className="form-control input-md" onChange={handleChange} value={formProduct.price} />
             <span className="help-block">Enter the price in cents (until we find a better way to handle this)</span>
           </div>
         </div>
@@ -48,7 +38,7 @@ const AdminProductForm = (props) => {
         <div className="form-group row">
           <label className="col-lg-6 col-md-8 col-form-label control-label" htmlFor="productInventory">Inventory</label>
           <div className="col-lg-6 col-md-8">
-            <input id="productInventory" name="productInventory" type="text" placeholder="0" className="form-control input-md" onChange={props.handleChange} />
+            <input id="productInventory" name="productInventory" type="text" placeholder="0" className="form-control input-md" onChange={handleChange} value={formProduct.inventory} />
             <span className="help-block">How many units are available?</span>
           </div>
         </div>
@@ -56,7 +46,7 @@ const AdminProductForm = (props) => {
         <div className="form-group row">
           <label className="col-lg-6 col-md-8 col-form-label control-label" htmlFor="productImageURL">Image URL</label>
           <div className="col-lg-6 col-md-8">
-            <input id="productImageURL" name="productImageURL" type="text" placeholder="defaults to '/assets/images/package.png'" className="form-control input-md" onChange={props.handleChange} />
+            <input id="productImageURL" name="productImageURL" type="text" placeholder="defaults to '/assets/images/package.png'" className="form-control input-md" onChange={handleChange} value={formProduct.imageURL} />
             <span className="help-block">A fully qualified URL (http://…)</span>
           </div>
         </div>
