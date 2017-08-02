@@ -1,5 +1,6 @@
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
+import { fetchSingleCat } from '../store';
 
 class SingleCat extends Component{
 
@@ -7,9 +8,13 @@ class SingleCat extends Component{
 		super(props);
 	}
 
+	componentDidMount() {
+		let catId = this.props.match.params.catId;
+		this.props.loadData(catId);
+	}
+
 	render(){
-		const catId = this.props.match.params.catId;
-		const cat = this.props.cat.cats.filter(c => Number(c.id) === Number(catId))[0];
+		const cat = this.props.cat.singleCat;
 
 			return (cat) ? (
 		   <div>
@@ -41,6 +46,12 @@ const mapState = (state) => ({
 	cat: state.cat
 });
 
-const mapDispatch = null;
+const mapDispatch = (dispatch) => {
+	return {
+		loadData(catId) {
+			dispatch(fetchSingleCat(catId));
+		}
+	};
+};
 
 export default connect(mapState, mapDispatch)(SingleCat);

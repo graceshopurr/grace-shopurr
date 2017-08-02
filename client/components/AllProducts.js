@@ -9,9 +9,7 @@ class AllProducts extends Component {
   }
 
   render() {
-    const products = this.props.product.products;
-    // console.log('props here', this.props);
-
+    const products = this.props.product.productList;
     return (
       <div className="AllProducts">
         <h3>Support Our Kitties!!!</h3>
@@ -19,12 +17,12 @@ class AllProducts extends Component {
         <p>
           Want to show love for our cats, even if you can’t bring one of them home with you? You can show your support by buying much-needed supplies for our shelter. This way, you know exactly how your donations are helping our Kitties.
         </p>
-
         <div className="row">
           {
             products.map(product => (
               <figure className="col-xs-4" key={product.id}>
                 <Link to={`/products/${product.id}`}>
+                  <img src={ product.imageURL } />
                   <figcaption className="caption">
                     <h5>{product.name}</h5>
                     <span>{product.dollarPrice}</span>

@@ -9,7 +9,7 @@ import AllCats from './components/AllCats';
 import SingleCat from './components/SingleCat';
 import AllProducts from './components/AllProducts';
 import SingleProduct from './components/SingleProduct';
-import { store, me, fetchCats, fetchProducts } from './store';
+import { store, me, fetchCatList, fetchProductList } from './store';
 import Main from './components/Main';
 
 /**
@@ -47,7 +47,7 @@ class Routes extends Component {
                 </Switch> : null
             }
             {/* Displays our Login component as a fallback */}
-            <Route component= {Login} />
+            <Route component={Login} />
           </Switch>
         </Main>
       </Router>
@@ -70,8 +70,8 @@ const mapDispatch = (dispatch) => {
   return {
     loadInitialData () {
       dispatch(me());
-      dispatch(fetchCats());
-      dispatch(fetchProducts());
+      dispatch(fetchCatList());
+      dispatch(fetchProductList());
     }
   };
 };

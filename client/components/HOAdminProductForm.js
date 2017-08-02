@@ -2,7 +2,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import AdminProductForm from './AdminProductForm';
-import { createProduct, changeProduct, fetchProductsById } from '../store/product.js';
+import { createProduct, changeProduct, fetchSingleProduct } from '../store/product.js';
 import store from '../store';
 
 /* -------------- COMPONENT -------------- */
@@ -22,7 +22,7 @@ function HOAdminProductForm(Component, thunkCreator) {
     componentDidMount() {
       if(this.props.match.params.productId) {
         this.productId = this.props.match.params.productId;
-        store.dispatch(fetchProductsById(this.productId));
+        store.dispatch(fetchSingleProduct(this.productId));
       }
     }
 
