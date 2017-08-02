@@ -1,16 +1,11 @@
 import React, {Component} from 'react';
 import {connect} from 'react-redux';
-import {Router} from 'react-router';
+import {Router, Redirect } from 'react-router';
 import {Route, Switch} from 'react-router-dom';
 import PropTypes from 'prop-types';
 import history from './history';
-import { Login, Signup, UserHome, EditProduct, AddProduct} from './components';
-import AllCats from './components/AllCats';
-import SingleCat from './components/SingleCat';
-import AllProducts from './components/AllProducts';
-import SingleProduct from './components/SingleProduct';
+import { AllCats, AllProducts, Login, Signup, UserHome, ChangeProduct, CreateProduct, SingleCat, SingleProduct, Main, Home, Cart, SearchResults, EditProduct, AddProduct} from './components';
 import { store, me, fetchCatList, fetchProductList } from './store';
-import Main from './components/Main';
 
 /**
  * COMPONENT
@@ -24,12 +19,15 @@ class Routes extends Component {
   render () {
 
     const {isLoggedIn} = this.props;
+    // console.log(Home);
 
     return (
       <Router history={history}>
         <Main>
           <Switch>
             {/* Routes placed here are available to all visitors */}
+            <Route exact path="/" component={Home} />
+            <Route exact path='/github' component={() => window.location = 'https://github.com/graceshopurr/grace-shopurr'}/>
             <Route path="/login" component={Login} />
             <Route path="/signup" component={Signup} />
             <Route exact path ="/products" component = {AllProducts} />
@@ -38,12 +36,13 @@ class Routes extends Component {
             <Route path="/products/:productId/edit" component={EditProduct} />
             <Route exact path ="/cats" component = {AllCats} />
             <Route path ="/cats/:catId" component = {SingleCat} />
+            <Route exact path = "/cart" component={Cart} />
+            <Route path ="/search/:query" component={SearchResults} />
             {
               isLoggedIn ?
                 <Switch>
                   {/* Routes placed here are only available after logging in */}
-                  <Route path="/home" component={UserHome} />
-                  <Route exact path ="/cats" component = {AllCats} />
+                  <Route path="/user" component={UserHome} />
                 </Switch> : null
             }
             {/* Displays our Login component as a fallback */}

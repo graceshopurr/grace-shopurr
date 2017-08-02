@@ -4,8 +4,13 @@
  * having to figure out which file they belong to!
  */
 export {default as Main} from './Main';
+export {default as Home} from './Home';
 export {default as UserHome} from './user-home';
 export {Login, Signup} from './auth-form';
-export {AllCats} from './AllCats';
-export {AllProducts} from './AllProducts';
 export {AddProduct, EditProduct} from './HOAdminProductForm';
+export {default as AllCats} from './AllCats';
+export {default as AllProducts} from './AllProducts';
+export {default as SingleCat} from './SingleCat';
+export {default as SingleProduct} from './SingleProduct';
+export {default as Cart} from './Cart';
+export {default as SearchResults} from './SearchResults';
