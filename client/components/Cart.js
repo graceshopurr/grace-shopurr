@@ -49,8 +49,29 @@ class Cart extends Component{
 		}
 	}
 
-	console.log(this.props.cart.dataProducts)
-	//use a for in loop for the object 
+	// console.log("dataCats", this.props.cart.dataCats);
+	var catObj = this.props.cart.dataCats;
+	console.log('data products!!!!', this.props.cart.dataProducts);
+	var productArr = this.props.cart.dataProducts
+
+	console.log('product array zero',productArr[0]);
+
+	let newArray = [];
+	let catObjArray = [];
+
+	 catObj.forEach(cat => {
+		for (let key in cat){
+			 newArray.push(key)
+		}
+	})
+	// console.log("NEWARRAY", newArray);
+	
+	for (let i = 0; i < catObj.length; i++){
+		catObjArray.push(catObj[i][newArray[i]])
+	}
+	// console.log('cat obj arr', catObjArray)
+
+	
 	
 	// console.log('THE PROPS ',this.props.cart);
 	// condition rendering on whether items are in the cart or not 
@@ -60,24 +81,33 @@ class Cart extends Component{
 	<div>
 	<h4>HI I AM A CART I HAVE THINGS IN ME</h4>
 		<h4> Cats You Want To Adopt </h4>
-		{ this.props.cart.dataCats.map((cat) => {
-			console.log('cat name', cat)
-			return (
-			<div key={Math.random()}>
+		{catObjArray.map(item => (
+			(<div key={Math.random()}>
 				<div>
-					Name: {cat.name}
-					<img src={cat.imageURL} />
+					Name: {item.name}
+					<br/>
+					<img src={item.imageURL} />
 				</div>
-			</div>
-
-				)
-		})}
+			</div>)
+		)) }
+		<h4> Products You Are Donating </h4> 
+		{productArr.map(item => (
+			(<div key={Math.random()}>
+				<div>
+					Name: {item.product.name}
+					<br/>
+					<img src={item.product.imageURL} />
+					<br/>
+					<span> Quantity: {item.quantity}</span>
+				</div>
+			</div>)
+		)) }
 	</div>
 	) : (
 		<h4> There are currently no items in your cart! </h4>
 	)
 
-		return(
+		return (
 			<div>
 				<h3> Your Cart: </h3>
 				<div> {cartItems} </div>
@@ -96,3 +126,5 @@ const mapState = (state) => ({
 })
 
 export default connect(mapState, mapDispatch)(Cart)
+
+
