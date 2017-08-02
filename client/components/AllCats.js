@@ -20,7 +20,7 @@ class AllCats extends Component {
 		let cats = this.props.cat.catList;
 		cats = cats.filter(cat => this.state.filter.includes(cat.status));
 		return (
-			<div className="AllCats">
+			<div className="AllCats col-lg-9 offset-lg-3">
 		    <h3>Our Cats</h3>
 		    <p>  &nbsp; Filter: &nbsp;
 		    <button type="button" className='btn btn-primary' value="all" onClick={this.handleFilter}>All</button> &nbsp;

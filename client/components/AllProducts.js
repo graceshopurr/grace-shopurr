@@ -28,7 +28,7 @@ class AllProducts extends Component {
     if (this.state.filter === 'high') products = products.sort(this.compare).reverse();
 
     return (
-      <div className="AllProducts">
+      <div className="AllProducts col-lg-9 offset-lg-3">
         <h3>Support Our Kitties!!!</h3>
 
         <p>
@@ -46,7 +46,7 @@ class AllProducts extends Component {
                   <img src={ product.imageURL } />
                   <figcaption className="caption">
                     <h5>{product.name}</h5>
-                    <span>{product.dollarPrice}</span>
+                    <span>${product.dollarPrice}</span>
                   </figcaption>
                 </Link>
               </figure>
