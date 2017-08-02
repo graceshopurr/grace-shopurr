@@ -51,10 +51,10 @@ class SingleCat extends Component{
 			 <div className = "single-cat col-lg-9 offset-lg-3">
 				<h3>{ cat.name }</h3>
 		   <div className="row">
-		   	<div className="single-cat-1 col-lg-2">
-					<img src={ cat.imageURL } className="img-thumbnail" />
+		   	<div className="single-cat-1 col-lg-3">
+					<img src={ cat.imageURL }  />
 				</div>
-				<div className="single-cat-1 col-lg-10">
+				<div className="single-cat-1 col-lg-9">
 					<span>
 						Status: <span className="label label-default">{cat.status} </span>
 					</span> <br />
