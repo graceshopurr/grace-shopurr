@@ -1,16 +1,22 @@
 import React, { Component} from 'react';
 import { connect } from 'react-redux';
-import { fetchSingleCat } from '../store';
+import { fetchSingleCat, incrementCat, fetchCartCat } from '../store';
 
 class SingleCat extends Component{
 
 	constructor(props){
 		super(props);
+		this.addToCart = this.addToCart.bind(this);
 	}
 
 	componentDidMount() {
 		let catId = this.props.match.params.catId;
 		this.props.loadData(catId);
+	}
+
+	addToCart(){
+		let catId = this.props.match.params.catId;
+		this.props.addingCat(catId);
 	}
 
 	render(){
@@ -35,7 +41,7 @@ class SingleCat extends Component{
 				<br />
 				<span>{ cat.description }</span>
 				<br />
-				{(cat.status === 'available') ? <button type="button" className="btn btn-warning">Adopt Me!</button>:null}
+				{(cat.status === 'available') ? <button onClick={this.addToCart} type="button" className="btn btn-warning">Adopt Me!</button>:null}
 			</div>
 			) : (<div />);
 
@@ -50,6 +56,14 @@ const mapDispatch = (dispatch) => {
 	return {
 		loadData(catId) {
 			dispatch(fetchSingleCat(catId));
+		},
+		addingCat(catId){
+			console.log('in here', catId);
+			dispatch(fetchCartCat())
+			//dispatchs a thunk creators that takes data and then dispatches an action creator
+			//the action creator will cause the reducer to update the state
+	
+			//dispatch an action creator that will tell the reducer to do something
 		}
 	};
 };

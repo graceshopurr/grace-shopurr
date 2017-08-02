@@ -39,7 +39,7 @@ export function fetchSingleCat (catId) {
         return axios.get(`/api/cats/${catId}`)
         .then(res => {
           dispatch(getSingleCat(res.data))
-          console.log(res.data);
+        //   console.log(res.data);
         })
         .catch(error => { console.log(error) });
     };

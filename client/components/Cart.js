@@ -50,7 +50,7 @@ class Cart extends Component{
 		}
 	}
 
-	console.log('THE PROPS ',this.props.cart);
+	// console.log('THE PROPS ',this.props.cart);
 	// condition rendering on whether items are in the cart or not 
 	const cartItems = hasItemsInCart ?
 
@@ -59,7 +59,7 @@ class Cart extends Component{
 	<h4>HI I AM A CART I HAVE THINGS IN ME</h4>
 		<h4> Cats You Want To Adopt </h4>
 		{ this.props.cart.dataCats.map((cat) => {
-			console.log('cat name', cat[3])
+			// console.log('cat name', cat[3])
 			return (
 			<div key={Math.random()}>
 				<div>

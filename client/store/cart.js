@@ -94,7 +94,7 @@ export function incrementProduct(productId){
 	}
 	cartObj = stringifyCart(cartObj);
 	localStorage.setItem('cart', cartObj);
-	console.log(localStorage.cart);
+	// console.log(localStorage.cart);
 }
 
 export function decrementProduct(productId){
@@ -111,7 +111,7 @@ export function decrementProduct(productId){
 
 	cartObj = stringifyCart(cartObj);
 	localStorage.setItem('cart', cartObj);
-	console.log(localStorage.cart);
+	// console.log(localStorage.cart);
 }
 
 export function incrementCat(catId){
@@ -121,7 +121,7 @@ export function incrementCat(catId){
 
 	cartObj = stringifyCart(cartObj);
 	localStorage.setItem('cart', cartObj);
-	console.log(localStorage.cart);
+	// console.log(localStorage.cart);
 }
 
 export function decrementCat(catId){
@@ -131,8 +131,24 @@ export function decrementCat(catId){
 
 	cartObj = stringifyCart(cartObj);
 	localStorage.setItem('cart', cartObj);
-	console.log(localStorage.cart);
+	// console.log(localStorage.cart);
 }
+
+//thunk creator for adding to cart = 
+
+// export const putCatOnCart = (catId) =>
+// 	dispatch => {
+// 		function incrementCat(catId){
+// 		cartObj = unstringifyCart();
+
+// 		cartObj.addedCatIds.push(catId);
+
+// 		cartObj = stringifyCart(cartObj);
+// 		localStorage.setItem('cart', cartObj);
+// 		console.log(localStorage.cart);
+// 	}
+// 	dispatch(addCatToCart(catId));
+// }
 
 //thunk creator: fetch cart  
 
@@ -185,11 +201,11 @@ export const fetchCartCat = () =>
 //reducer
 
 export default function (state = initialState, action){
-	switch(action.type){
+	switch (action.type){
 		case ADD_CAT_TO_CART:
 			return Object.assign({}, state, {addedCatIds: [...state.addedCatIds, action.catId]})
 		case REMOVE_CAT_FROM_CART:
-			return Object.assign({}, state, {addedCatIds : addedCatIds.filter( cat => cat.id !== action.catId)})
+			return Object.assign({}, state, {addedCatIds: addedCatIds.filter( cat => cat.id !== action.catId)})
 		case ADD_PRODUCT_TO_CART: 
 			return Object.assign({}, state, {addedProductIds: [...state.addedProductIds, action.productId], quantityById : Object.assign({}, state.quantityById, {[action.productId] :1})})
 		case INCREMENT_PRODUCT_QUANTITY:
@@ -197,13 +213,13 @@ export default function (state = initialState, action){
 		case DECREMENT_PRODUCT_QUANTITY:
 			return Object.assign({},state, {quantityById: Object.assign({}, state.quantityById, {[action.productId]: [action.productId] - 1})})
 		case REMOVE_PRODUCT_FROM_CART:
-			return Object.assign({}, state, {addedProductIds : addedProductIds.filter( product => product.id !== action.productId)}, {quantityById: Object.assign({}, state.quantityById, {[action.productId]: 0})})
+			return Object.assign({}, state, {addedProductIds: addedProductIds.filter( product => product.id !== action.productId)}, {quantityById: Object.assign({}, state.quantityById, {[action.productId]: 0})})
 		case SUBMIT_ORDER:
 			return Object.assign({}, state, { status: 'processing'})
 		case CANCEL_ORDER:
 			return Object.assign({}, state, {status: 'canceled'})
 		case FETCH_CART_CAT:
-			return Object.assign({}, state, {dataCats : action.cats});
+			return Object.assign({}, state, {dataCats: action.cats});
 		case FETCH_CART_PRODUCT:
 			return Object.assign({}, state, {dataProducts: action.things});
 		case FETCH_ORDERS:
