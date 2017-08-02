@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {withRouter, Link} from 'react-router-dom';
 import {logout} from '../store';
 import Sidebar from './Sidebar';
-
+import NavBarCart from './NavBarCart';
 
 /**
  * COMPONENT
@@ -13,21 +13,20 @@ import Sidebar from './Sidebar';
  *  rendered out by the component's `children`.
  */
 const Main = (props) => {
-
+  // console.log(props);
   const {children, handleClick, isLoggedIn} = props;
   return (
      <div id = "main" className="container-fluid">
       <div className="container">
       <div className="row-offcanvas row-offcanvas-left">
-
           <div className="col-md-12">
-            <h1>Grace Shopurr</h1>
+            <h1 className="MainTitle">Grace Shopurr</h1>
             <nav>
               {
                 isLoggedIn ?
                   <div>
                     {/* The navbar will show these links after you log in */}
-                    <Link to="/home">Home</Link>
+                    <Link to="/user">Profile</Link>
                     <a href="#" onClick={handleClick}>Logout</a>
                   </div> :
                   <div>
@@ -36,6 +35,7 @@ const Main = (props) => {
                     <Link to="/signup">Sign Up</Link>
                   </div>
               }
+                <NavBarCart /> 
             </nav>
 
             <hr />
