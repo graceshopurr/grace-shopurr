@@ -12,7 +12,7 @@ export default class NavBarCart extends Component{
     let itemsInCart = null  //products.length > 0;
 
 	// if (localStorage.cart){
-    //     // let theCart = JSON.parse(localStorage.cart);
+    //     let theCart = JSON.parse(localStorage.cart);
     //     let product =  <img src ='/public/assets/images/package.png' />
     //     let cat = <img src = '/public/assets/images/smiling-cat-face-with-heart-shaped-eyes.png' />
 
@@ -34,7 +34,7 @@ export default class NavBarCart extends Component{
         return (
             <div>
                 <Link to="/cart"> Cart </Link>
-                <span className="btn">{numberItems}</span> <span>{itemsInCart}</span>
+                <span className="btn">{numberItems}</span>
             </div>
         )
     }
